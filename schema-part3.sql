@@ -1,7 +1,7 @@
 DROP TABLE IF EXISTS trip;
 DROP TABLE IF EXISTS reservation;
 DROP TABLE IF EXISTS schedule;
-DROP TABLE IF EXISTS boat_vhf;
+DROP TABLE IF EXISTS boatwithvhf;
 DROP TABLE IF EXISTS boat;
 DROP TABLE IF EXISTS owner;
 DROP TABLE IF EXISTS sailor;
@@ -11,6 +11,12 @@ DROP TABLE IF EXISTS wharf;
 DROP TABLE IF EXISTS marina;
 DROP TABLE IF EXISTS location;
 DROP TABLE IF EXISTS country;
+
+-- PROJECT --
+
+CREATE SCHEMA 'schema-part3.sql'; --(criar schema)
+SET search_path TO 'schema-part3.sql'; --(usar/mudar schema)
+SHOW search_path; --(ver schema atual)
 
 CREATE TABLE country
 (
