@@ -14,9 +14,14 @@ DROP TABLE IF EXISTS country;
 
 -- PROJECT --
 
-CREATE SCHEMA 'schema-part3.sql'; --(criar schema)
-SET search_path TO 'schema-part3.sql'; --(usar/mudar schema)
-SHOW search_path; --(ver schema atual)
+-- Criar schema a parte para as tabelas do projeto ficarem no seu próprio espaço, sem outras à mistura
+CREATE SCHEMA schema_part3;
+
+-- Mudar schema atual para schema do projeto
+SET search_path TO schema_part3;
+
+-- Mostrar schema atual
+SHOW search_path; 
 
 CREATE TABLE country
 (
