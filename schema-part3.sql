@@ -21,7 +21,7 @@ CREATE SCHEMA schema_part3;
 SET search_path TO schema_part3;
 
 -- Mostrar schema atual
-SHOW search_path; 
+SHOW search_path;
 
 CREATE TABLE country
 (
