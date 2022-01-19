@@ -1,19 +1,19 @@
--- Populate country
-insert into country values('PRT', 'Portugal','https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Flag_of_Portugal.svg/255px-Flag_of_Portugal.svg.png');
-insert into country values('ZAF', 'South Africa','https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Flag_of_South_Africa.svg/1280px-Flag_of_South_Africa.svg.png');
-insert into country values('ESP', 'Spain','https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Flag_of_Spain.svg/2560px-Flag_of_Spain.svg.png');
-insert into country values('USA', 'United States','https://upload.wikimedia.org/wikipedia/commons/a/a4/Flag_of_the_United_States.svg');
-insert into country values('AUS', 'Australia','https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Flag_of_Australia_%28converted%29.svg/1024px-Flag_of_Australia_%28converted%29.svg.png');
-insert into country values('JPN', 'Japan','https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Flag_of_Japan.svg/800px-Flag_of_Japan.svg.png');
-insert into country values('BRA', 'Brazil','https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Flag_of_Brazil_%283-2%29.svg/2560px-Flag_of_Brazil_%283-2%29.svg.png');
-insert into country values('ARG', 'Argentina','https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Flag_of_Argentina.svg/1280px-Flag_of_Argentina.svg.png');
-insert into country values('ISL', 'Iceland','https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Flag_of_Iceland.svg/1250px-Flag_of_Iceland.svg.png');
-insert into country values('ITA', 'Italy','https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Flag_of_Italy.svg/2560px-Flag_of_Italy.svg.png');
-insert into country values('GBR', 'United Kingdom','https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Flag_of_Great_Britain_%281707–1800%29.svg/2560px-Flag_of_Great_Britain_%281707–1800%29.svg.png');
-insert into country values('GRC', 'Greece','https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Flag_of_Greece.svg/1280px-Flag_of_Greece.svg.png');
-insert into country values('MOZ', 'Mozambique','https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Flag_of_Mozambique.svg/2560px-Flag_of_Mozambique.svg.png');
-insert into country values('ARE', 'United Arab Emirates','https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Flag_of_the_United_Arab_Emirates.svg/1280px-Flag_of_the_United_Arab_Emirates.svg.png');
-insert into country values('CAN', 'Canada','https://upload.wikimedia.org/wikipedia/commons/d/d9/Flag_of_Canada_%28Pantone%29.svg');
+-- Populate country (correct)
+insert into country values('tinyurl.com/v5n8tvdd','Portugal','PT');
+insert into country values('tinyurl.com/5exjjxwd','South Africa','ZA');
+insert into country values('tinyurl.com/2fsbc42p','Spain','ES');
+insert into country values('tinyurl.com/yckkzx47','United States','US');
+insert into country values('tinyurl.com/5jnb8p3y','Australia','AU');
+insert into country values('tinyurl.com/bdfdvdtz','Japan','JP');
+insert into country values('tinyurl.com/y62xx23t','Brazil','BR');
+insert into country values('tinyurl.com/3sy6mx2x','Argentina','AR');
+insert into country values('tinyurl.com/33f2s9wt','Iceland','IS');
+insert into country values('tinyurl.com/2p8rkbfh','Italy','IT');
+insert into country values('tinyurl.com/mv6z6xd3','United Kingdom','GB');
+insert into country values('tinyurl.com/yckrujsy','Greece','GR');
+insert into country values('tinyurl.com/2p8bpxc4','Mozambique','MZ');
+insert into country values('tinyurl.com/39zdcjaj','United Arab Emirates','AE');
+insert into country values('tinyurl.com/4n6tdfba','Canada','CA');
 
 
 -- Populate Location
@@ -184,12 +184,12 @@ insert into boat values ('GBR', 8367,2021,40,'The Barnacle','GBR',20566893);
 
 
 --Populate Boat with VHF
-insert into boatwithvhf values ('ITA', 18293, 294826586);
-insert into boatwithvhf values ('PRT', 20586, 937573910);
-insert into boatwithvhf values ('AUS', 10083, 184794396);
-insert into boatwithvhf values ('CAN', 20956, 194739576);
-insert into boatwithvhf values ('GBR', 14296, 182958928);
-insert into boatwithvhf values ('ZAF', 49602, 120069305);
+insert into boat_vhf values ('ITA', 18293, 294826586);
+insert into boat_vhf values ('PRT', 20586, 937573910);
+insert into boat_vhf values ('AUS', 10083, 184794396);
+insert into boat_vhf values ('CAN', 20956, 194739576);
+insert into boat_vhf values ('GBR', 14296, 182958928);
+insert into boat_vhf values ('ZAF', 49602, 120069305);
 
 --Populate Schedule
 insert into schedule values('2021-12-30','2022-01-06');
