@@ -20,7 +20,8 @@ END;
 $$ LANGUAGE plpgsql;
 
 drop trigger tg_insert_reservation on reservation;
-CREATE TRIGGER tg_insert_reservation
+
+create trigger tg_insert_reservation
 before insert or update ON reservation
 FOR EACH ROW EXECUTE PROCEDURE tg_insert_reservation_proc();
 
