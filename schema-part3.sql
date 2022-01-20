@@ -1,7 +1,7 @@
 DROP TABLE IF EXISTS trip;
 DROP TABLE IF EXISTS reservation;
 DROP TABLE IF EXISTS schedule;
-DROP TABLE IF EXISTS boatwithvhf;
+DROP TABLE IF EXISTS boat_vhf;
 DROP TABLE IF EXISTS boat;
 DROP TABLE IF EXISTS owner;
 DROP TABLE IF EXISTS sailor;
@@ -15,7 +15,7 @@ DROP TABLE IF EXISTS country;
 -- PROJECT --
 
 -- Criar schema a parte para as tabelas do projeto ficarem no seu próprio espaço, sem outras à mistura
-CREATE SCHEMA schema_part3;
+--CREATE SCHEMA schema_part3;
 
 -- Mudar schema atual para schema do projeto
 SET search_path TO schema_part3;
