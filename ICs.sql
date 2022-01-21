@@ -27,6 +27,23 @@ FOR EACH ROW EXECUTE PROCEDURE tg_insert_reservation_proc();
 
 --IC2
 --pescadinha de rabo na boca
+-- código do prof
+DROP TRIGGER IF EXISTS tg_verify_account ON borrower;
+
+CREATE CONSTRAINT TRIGGER tg_verify_account
+AFTER INSERT ON borrower DEFERRABLE
+FOR EACH ROW EXECUTE PROCEDURE verify_account();
+
+START TRANSACTION;
+SET CONSTRAINTS ALL DEFERRED;
+INSERT INTO customer VALUES('Alberto','Rua 1','Lisboa');
+INSERT INTO loan VALUES('1111', 'Central', 100);
+-- begin (inserting in borrower before depositor would not be possible without deferring)
+INSERT INTO borrower VALUES('Alberto', '1111');
+INSERT INTO depositor VALUES('Alberto', 'A-101');
+-- end (inserting in borrower before depositor would not be possible without deferring)
+COMMIT; -- trigger will be fired here
+-- fim do codigo do prof
 
 --IC3
 CREATE OR REPLACE FUNCTION tg_check_country_proc()
