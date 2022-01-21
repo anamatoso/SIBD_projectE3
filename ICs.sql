@@ -11,19 +11,81 @@ BEGIN
     OPEN cursor_reservation;
     LOOP
         FETCH cursor_reservation INTO reserva;
-        if (new.start_date <= reserva.end_date) and (new.end_date >= reserva.start_date) then
+        if reserva is null then
+            exit;
+        elsif (new.start_date <= reserva.end_date) and (new.end_date >= reserva.start_date) then
+            raise exception 'Reservation_Overlap' using hint ='The reservation overlaps with another on the data base';
+        end if;
+    end loop;
+    close cursor_reservation;
+    return new;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION tg_insert_reservation_proc()
+RETURNS TRIGGER AS
+$$
+DECLARE cursor_reservation CURSOR FOR
+    SELECT * FROM reservation;
+declare reserva reservation%ROWTYPE;
+BEGIN
+    OPEN cursor_reservation;
+    LOOP
+        FETCH cursor_reservation INTO reserva;
+        if 0>1 then
             raise exception 'Reservation_Overlap' using hint ='The reservation overlaps with another on the data base';
         end if;
     end loop;
     return new;
     close cursor_reservation;
-END;
+END
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION chk_balance_interval_proc() RETURNS TRIGGER AS
+$$
+    DECLARE cursor_reservation CURSOR FOR
+    SELECT * FROM reservation;
+        declare reserva reservation%ROWTYPE;
+BEGIN
+        OPEN cursor_reservation;
+    LOOP
+        FETCH cursor_reservation INTO reserva;
+IF NEW.balance < 0 OR NEW.balance > 100 THEN
+RAISE EXCEPTION 'Withdrawal or deposit past the limits';
+END IF;
+end loop;
+
+RETURN NEW; END;
 $$ LANGUAGE plpgsql;
 
 --drop trigger tg_insert_reservation on reservation;
 create trigger tg_insert_reservation
 before insert or update ON reservation
 FOR EACH ROW EXECUTE PROCEDURE tg_insert_reservation_proc();
+
+
+CREATE OR REPLACE FUNCTION average_balance() RETURNS FLOAT
+AS
+$$
+DECLARE balance_var REAL DEFAULT 0.0; DECLARE sum_balance REAL DEFAULT 0.0;
+DECLARE count_balance INTEGER DEFAULT 0;
+DECLARE cursor_account CURSOR FOR
+SELECT balance FROM account;
+BEGIN
+OPEN cursor_account;
+LOOP
+    FETCH cursor_account INTO balance_var;
+    sum_balance := sum_balance + balance_var; count_balance := count_balance + 1;
+    if sum_balance = 0 then
+        raise exception 'fg';
+    end if;
+END LOOP;
+CLOSE cursor_account;
+RETURN sum_balance / count_balance;
+END
+$$ LANGUAGE plpgsql;
+
+
 
 --IC2
 --pescadinha de rabo na boca
@@ -50,7 +112,7 @@ CREATE OR REPLACE FUNCTION tg_check_country_proc()
 RETURNS TRIGGER AS
 $$
 begin
-    if (select count(distinct latitude,longitude) -- distinct is implicit since lat,long are PK --count(*)
+    if (select count(distinct (latitude,longitude)) -- distinct is implicit since lat,long are PK --count(*)
         from location
         where iso_code=new.iso_code)<1
     then
@@ -61,10 +123,9 @@ end;
 $$ language plpgsql;
 
 --drop trigger tg_check_country on boat;
-CREATE TRIGGER tg_check_country
+create trigger tg_check_country
 before insert or update on boat
-FOR EACH ROW EXECUTE PROCEDURE tg_check_country_proc();
-
+for each row execute procedure tg_check_country_proc();
 
 
 
