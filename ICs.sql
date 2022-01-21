@@ -32,16 +32,16 @@ FOR EACH ROW EXECUTE PROCEDURE tg_insert_reservation_proc();
 CREATE OR REPLACE FUNCTION tg_check_country_proc()
 RETURNS TRIGGER AS
 $$
-BEGIN
-    if (select count(distinct latitude,longitude)
+begin
+    if (select count(distinct latitude,longitude) -- distinct is implicit since lat,long are PK --count(*)
         from location
         where iso_code=new.iso_code)<1
     then
     raise exception 'Country does not have at least one location';
     end if;
 return new;
-END;
-$$ LANGUAGE plpgsql;
+end;
+$$ language plpgsql;
 
 --drop trigger tg_check_country on boat;
 CREATE TRIGGER tg_check_country
