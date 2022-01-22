@@ -1,73 +1,32 @@
---Queries
+-- Queries
+-- 1. Who is the owner?
+select id_owner, iso_code_owner, iso_code, count(distinct (iso_code, cni))
+from boat
+group by id_owner, iso_code_owner, iso_code
+having count(distinct (iso_code, cni)) >= all(select count(distinct (iso_code, cni)) from boat group by id_owner, iso_code_owner, iso_code);
 
---Query 1
-select id_owner, iso_code_owner, max(nboats)
-from (
-    select id_owner, iso_code_owner, count(cni,iso_code) as nboats
-    from boat
-    group by id_owner, iso_code_owner) a
-group by id_owner, iso_code_owner;
-
---Query 2
-select id_owner, iso_code_owner, count(distinct iso_code) as nboats_distinct_country
+-- 2.
+select distinct id_owner, iso_code_owner, count(distinct iso_code) as ncountry
 from boat
 group by id_owner, iso_code_owner
-having count(distinct iso_code)>=2;
+having count(distinct iso_code) > 1;
 
---Query 3
-select id_sailor, iso_code_sailor
-from trip t1
-where not exists(
-    select latitude,longitude
-    from trip trip join location l on trip.end_latitude = l.latitude and trip.end_longitude = l.longitude
-    where iso_code=(select iso_code from country where l.name='Portugal')
-    except
-    select end_latitude,end_longitude
-    from trip t2
-    where t2.iso_code_sailor=t1.iso_code_sailor and t1.id_sailor=t2.id_sailor
-    );
+-- 3. JUSTIFICAR entre PT ou Portugal + ir buscar info as trip em vez de ao sailor (pq a trip tem os sailors que sailam, e nao todos)
+select s.id_sailor, s.iso_code_sailor
+from trip s
+where not exists (
+    (select latitude,longitude from location l where l.iso_code = (select iso_code from country where l.name='Portugal'))
+    except (select end_latitude,end_longitude from trip t where t.id_sailor = s.id_sailor and t.iso_code_sailor = s.iso_code_sailor));
 
-
---Query 4
-select id_sailor, iso_code_sailor, count(date,cni,iso_code_boat,id_sailor,iso_code_sailor,start_date,end_date) ntrips
+-- 4.
+select id_sailor, iso_code_sailor, cni, iso_code_boat, start_date, end_date, count(date, cni, iso_code_boat, id_sailor, iso_code_sailor, start_date, end_date) as ntrips
 from trip
-group by id_sailor, iso_code_sailor
+group by cni, iso_code_boat, id_sailor, iso_code_sailor, start_date, end_date
 order by ntrips desc;
---deviamos ver como se faz para mostrar tipo o top 3 (eu ja vi como se faz mas o prof diz que nao podemos usar esse comando)
 
-
---Query 5
-select id_sailor, iso_code_sailor,date,cni,iso_code_boat,id_sailor,iso_code_sailor,start_date,end_date,sum(duration) as sum_duration
+-- 5.
+select id_sailor,iso_code_sailor,cni,iso_code_boat,id_sailor,iso_code_sailor,start_date,end_date,sum(duration) as sum_trip
 from trip
-group by id_sailor, iso_code_sailor,date,cni,iso_code_boat,start_date,end_date --sailor e reservation
-order by sum_duration desc;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+group by cni, iso_code_boat, id_sailor, iso_code_sailor, start_date, end_date --reservation
+order by sum_trip desc;
 
