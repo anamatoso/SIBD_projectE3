@@ -1,0 +1,22 @@
+#!/usr/bin/python3
+import cgi
+
+form_name = cgi.FieldStorage()
+
+print('Content-type:text/html\n\n')
+print('<html>')
+print('<head>')
+print('<title>Register Boat</title>')
+print('</head>')
+print('<body>')
+
+# The form will send the info needed for the SQL query
+print('<form action="remove.cgi" method="post">')
+print('<p>cni: <input type="text" name="cni"/></p>')
+print('<p>iso_code: <input type="text" name="iso_code"/></p>')
+
+
+print('<p><input type="submit" value="Submit"/></p>')
+print('</form>')
+print('</body>')
+print('</html>')

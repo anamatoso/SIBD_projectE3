@@ -1,0 +1,25 @@
+#!/usr/bin/python3
+import cgi
+
+form_name = cgi.FieldStorage()
+
+print('Content-type:text/html\n\n')
+print('<html>')
+print('<head>')
+print('<title>Register Boat</title>')
+print('</head>')
+print('<body>')
+
+# The form will send the info needed for the SQL query
+print('<form action="register.cgi" method="post">')
+print('<p>name: <input type="text" name="name"/></p>')
+print('<p>year: <input type="text" name="year"/></p>')
+print('<p>cni: <input type="text" name="cni"/></p>')
+print('<p>iso_code: <input type="text" name="iso_code"/></p>')
+print('<p>id_sailor: <input type="text" name="id_sailor"/></p>')
+print('<p>iso_code_sailor: <input type="text" name="iso_code_sailor"/></p>')
+
+print('<p><input type="submit" value="Submit"/></p>')
+print('</form>')
+print('</body>')
+print('</html>')
