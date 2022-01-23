@@ -20,7 +20,7 @@ try:
         print('<p><a href="owner.cgi">Register or remove owners</a></p>')
         print('<p><a href="boat.cgi">Register or remove boats</a></p>')
         print('<p><a href="sailor.cgi">Insert, list and remove boat sailors</a></p>')
-        print('<p><a href="reservation.cgi">Create and remove reservations</a></p>')
+        print('<p><a href="reservations.cgi">Create and remove reservations</a></p>')
 
         # Closing connection
         cursor.close() 
