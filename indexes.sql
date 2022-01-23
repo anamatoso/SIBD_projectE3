@@ -41,9 +41,10 @@ DROP INDEX name_idx;
 EXPLAIN ANALYSE SELECT count(*)
 FROM trip
     INNER JOIN location ON trip.end_latitude=location.latitude AND trip.end_longitude=location.longitude
-WHERE start_date BETWEEN 2015-08-10 AND 2017-12-12 AND location.name LIKE '%SOME_PATTERN%';
--- planning time:
--- execution time:
+WHERE start_date BETWEEN '2015-08-10' AND '2017-12-12' AND location.name LIKE '%SOME_PATTERN%';
+-- planning time: 0.301 ms
+-- execution time: 0.085 ms
+-- seq scan on location + bitmap heap scan on trip
 
 -- For this query, there are two attributes being searched: start date and location name. For the start date attribute,
 -- we have a range query, which indicates the most adequate index would be a B-tree index. For the location attribute, a
@@ -54,16 +55,19 @@ WHERE start_date BETWEEN 2015-08-10 AND 2017-12-12 AND location.name LIKE '%SOME
 -- Reference: https://www.viralpatel.net/oracle-index-usage-like-operator-domain-indexes/
 
 CREATE INDEX start_date_idx ON trip(start_date); --b-tree index on boat.year
--- planning time:
--- execution time:
+-- planning time: 0.509 ms (same)
+-- execution time: 0.106 ms (same)
 DROP INDEX start_date_idx;
+-- seq scan on location + bitmap heap scan on trip
 
 -- testing hash and b-tree for location
 CREATE INDEX loc_b_idx ON location(name);
 DROP INDEX loc_b_idx;
--- planning time:
--- execution time:
+-- planning time: 0.517 ms (same)
+-- execution time: 0.085 ms (same)
+-- seq scan on location + bitmap heap scan on trip
 CREATE INDEX loc_hash_idx ON location USING HASH (name);
 DROP INDEX loc_hash_idx;
--- planning time:
--- execution time:
+-- planning time: 0.416 ms (same)
+-- execution time: 0.081 ms (same)
+-- seq scan on location + bitmap heap scan on trip
