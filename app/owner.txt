@@ -4,7 +4,7 @@ import login
 print('Content-type:text/html\n\n') 
 print('<html>')
 print('<head>')
-print('<title>LBoat Management System</title>') 
+print('<title>Boat Management System</title>') 
 print('</head>')
 print('<body>')
 print('<h3>Owners</h3>')

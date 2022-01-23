@@ -7,20 +7,16 @@ print('<head>')
 print('<title>Boat Management System</title>') 
 print('</head>')
 print('<body>')
-print('<h3>Boat Management System</h3>')
-print('<p>Welcome to the Boating Management System!</p>')
-print('<p> Here, you can add or remove boats, owners, sailors and reservations from the system, as well as list all boat sailors registered.</p>')
-connection = None
+print('<h3>Reservations</h3>')
+connection = None 
 try:
         # Creating connection
         connection = psycopg2.connect(login.credentials) 
         cursor = connection.cursor()
 
         # List options to user: add or remove owners
-        print('<p><a href="owner.cgi">Register or remove owners</a></p>')
-        print('<p><a href="boat.cgi">Register or remove boats</a></p>')
-        print('<p><a href="sailor.cgi">Insert, list and remove boat sailors</a></p>')
-        print('<p><a href="reservations.cgi">Create and remove reservations</a></p>')
+        print('<p><a href="add_reservation.cgi">Add Reservation</a></p>')
+        print('<p><a href="del_reservation.cgi">Remove Reservation</a></p>')
 
         # Closing connection
         cursor.close() 
