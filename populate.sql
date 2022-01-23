@@ -158,43 +158,43 @@ insert into owner values (22058689,'ZA','2001-04-14');
 insert into owner values (20566893,'GB','1998-02-17');
 insert into owner values (2945191,'PT','1955-04-23');
 
---Populate Boat
-insert into boat values ('PRT', 98237,2000,40,'O Desconhecido','BRA',8873768);
-insert into boat values ('ARG', 839,2001,40,'El Rey','ARG',3824);
-insert into boat values ('PRT', 23748,2012,30,'EL Hombre','ESP',8379268);
-insert into boat values ('AUS', 23784,2020,20,'The Great','AUS',89347874);
-insert into boat values ('ZAF', 58947,2021,50,'The Inocent','PRT',2945190);
-insert into boat values ('ITA', 18293,2007,50,'Breeza','ZAF',126578); --vhf
-insert into boat values ('PRT', 20586,2016,60,'Avante','ITA',1345687); --vhf
-insert into boat values ('AUS', 10083,2015,20,'Antelope','ARG',4850294); --vhf
-insert into boat values ('ISL', 11940,2004,45,'Freedom','JPN',1220588);
-insert into boat values ('ZAF', 49602,1999,40,'Seas the Day','ARG',3824); --vhf
-insert into boat values ('CAN', 58201,2001,40,'Carpe Diem','ESP',22059683);
-insert into boat values ('USA', 30699,1990,50,'Blue Moon','GRC',50025860);
-insert into boat values ('GBR', 10059,2015,20,'Escape','ZAF',22058689);
-insert into boat values ('CAN', 20956,1984,45,'Liberdade','PRT',13359683); --vhf
-insert into boat values ('GBR', 14296,2019,55,'Serendipity','AUS',89347874); --vhf
-insert into boat values ('ZAF', 23874682,2021,100,'Conspirasea','PRT',2945191);
-insert into boat values ('GBR', 93476,2021,40,'Black Pearl','USA',5679890);
-insert into boat values ('PRT', 345,2021,40,'The Flying Dutchman','BRA',456890);
-insert into boat values ('AUS', 3532,2021,40,'The Queen Annes Revenge','AUS',14617319);
-insert into boat values ('JPN', 4352,2021,40,'The Dying Gull','JPN',55667);
-insert into boat values ('ISL', 346547,2021,40,'Empress','ISL',68904);
-insert into boat values ('ISL', 848934,2021,40,'Wicked Wench','ISL',2000582);
-insert into boat values ('ITA', 93287,2021,40,'Pirate Armada','ITA',2945190);
-insert into boat values ('BRA', 28736,2021,40,'Jolly Roger','BRA',1046205);
-insert into boat values ('GBR', 8367,2021,40,'The Barnacle','GBR',20566893);
+--Populate Boat (correct)
+insert into boat values ('O Desconhecido',2000,'98237','PT','8873768','BR');
+insert into boat values ('El Rey',2001,'839','AR','3824','AR');
+insert into boat values ('EL Hombre',2012,'23748','PT','8379268','ES');
+insert into boat values ('The Great',2020,'23784','AU','89347874','AU');
+insert into boat values ('The Inocent',2021, '58947','ZA','2945190','PT');
+insert into boat values ('Breeza',2007,'18293','IT','126578','ZA'); --vhf
+insert into boat values ('Saudade',2016,'20586','PT',1345687,'IT'); --vhf
+insert into boat values ('Antelope',2015,'10083','AU','4850294','AR'); --vhf
+insert into boat values ('Freedom',2004,'11940','IS','1220588','JP');
+insert into boat values ('Seas the Day',1999,'49602','ZA','3824','AR'); --vhf
+insert into boat values ('Carpe Diem',2001,'58201','CA','22059683','ES');
+insert into boat values ('Blue Moon',1990,'30699','US','50025860','GR');
+insert into boat values ('Escape',2015,'10059','GB','22058689','ZA');
+insert into boat values ('Liberdade',1984,'20956','CA','13359683','PT'); --vhf
+insert into boat values ('Serendipity',2019,'14296','GB','89347874','AU'); --vhf
+insert into boat values ('Conspirasea',2021,'23874682','ZA','2945191','PT');
+insert into boat values ('Black Pearl',2021,'93476','GB','5679890','US');
+insert into boat values ('The Flying Dutchman',2021,'345','PT','456890','BR');
+insert into boat values ('The Queen Annes Revenge',2021,'3532','AU','14617319','AU');
+insert into boat values ('The Dying Gull',2021,'4352','JP','55667','JP');
+insert into boat values ('Empress',2021,'346547','IS','68904','IS');
+insert into boat values ('Wicked Wench',2021,'848934','IS','2000582','IS');
+insert into boat values ('Pirate Armada',2021,'93287','IT','2945190','IT');
+insert into boat values ('Jolly Roger',2021,'28736','BR','1046205','BR');
+insert into boat values ('The Barnacle',2021,'8367','GB','20566893','GB');
 
 
---Populate Boat with VHF
-insert into boat_vhf values ('ITA', 18293, 294826586);
-insert into boat_vhf values ('PRT', 20586, 937573910);
-insert into boat_vhf values ('AUS', 10083, 184794396);
-insert into boat_vhf values ('CAN', 20956, 194739576);
-insert into boat_vhf values ('GBR', 14296, 182958928);
-insert into boat_vhf values ('ZAF', 49602, 120069305);
+--Populate Boat with VHF (correct)
+insert into boat_vhf values (294826586,'18293','IT');
+insert into boat_vhf values (937573910,'20586','PT');
+insert into boat_vhf values (184794396,'10083','AU');
+insert into boat_vhf values (194739576,'20956','CA');
+insert into boat_vhf values (182958928,'14296','GB');
+insert into boat_vhf values (120069305,'49602','ZA');
 
---Populate Schedule
+--Populate Schedule (correct)
 insert into schedule values('2021-12-30','2022-01-06');
 insert into schedule values('2021-12-30','2021-12-31');
 insert into schedule values('2021-12-23','2021-12-26');
@@ -202,32 +202,32 @@ insert into schedule values('2021-12-30','2022-01-30');
 insert into schedule values('2020-07-30','2020-08-10');
 insert into schedule values('2022-08-10','2022-08-25');
 
---Populate Reservation
-insert into reservation values('PRT',98237,'PRT',8435738,'2021-12-30','2022-01-06');
-insert into reservation values('ARG',839,'ITA',23874876,'2021-12-30','2021-12-31');
-insert into reservation values('PRT',23748,'AUS',89347874,'2021-12-30','2021-12-31');
-insert into reservation values('AUS',23784,'JPN',2934729,'2021-12-30','2022-01-30');
-insert into reservation values('ZAF',49602,'JPN',1220588,'2020-07-30','2020-08-10');
-insert into reservation values('GBR', 14296,'CAN',38596665,'2022-08-10','2022-08-25');
+--Populate Reservation (correct)
+insert into reservation values('98237','PT','8435738','PT','2021-12-30','2022-01-06');
+insert into reservation values('839','AR','23874876','IT','2021-12-30','2021-12-31');
+insert into reservation values('23748','PT','89347874','AU','2021-12-30','2021-12-31');
+insert into reservation values('23784','AU','2934729','JP','2021-12-30','2022-01-30');
+insert into reservation values('49602','ZA','1220588','JP','2020-07-30','2020-08-10');
+insert into reservation values('14296','GB','38596665','CA','2022-08-10','2022-08-25');
 
---Populate Trip
+--Populate Trip (correct)
 -- maria joaquina vai n'o desconhecido numa reserva de 8 dias com 2 trips: tokyo-sidney e sidney-sao paulo
-insert into trip values('2021-12-30',interval '1 day','PRT',98237,'PRT',8435738,'2021-12-30','2022-01-06', 35.652305, 139.761995,-33.860549, 151.211336);
-insert into trip values('2021-12-31',interval '6 days','PRT',98237,'PRT',8435738,'2021-12-30','2022-01-06', -33.860549, 151.211336,-23.5506507,-46.6333824);
+insert into trip values('2021-12-30',1,'98237','PT','8435738','PT','2021-12-30','2022-01-06', 35.652305, 139.761995,-33.860549, 151.211336);
+insert into trip values('2021-12-31',6,'98237','PT','8435738','PT','2021-12-30','2022-01-06', -33.860549, 151.211336,-23.5506507,-46.6333824);
 -- Luigi ferrari vai no El Rey numa reserva de 2 dias com 1 trip: naples-barcelona
-insert into trip values('2021-12-30',interval '1 day','ARG',839,'ITA',23874876,'2021-12-30','2021-12-31', 40.839980,14.252540,41.385063,2.173404);
+insert into trip values('2021-12-30',1,'839','AR','23874876','IT','2021-12-30','2021-12-31', 40.839980,14.252540,41.385063,2.173404);
 -- nicole kidman vai no El Hombre numa reserva de 2 dias com 1 trip: Reykjavik-Funchal
-insert into trip values('2021-12-30',interval '1 day','PRT',23748,'AUS',89347874,'2021-12-30','2021-12-31', 64.128288,-21.827774,32.6496497,-16.9086783);
+insert into trip values('2021-12-30',1,'23748','PT','89347874','AU','2021-12-30','2021-12-31', 64.128288,-21.827774,32.6496497,-16.9086783);
 -- Fusajiro Yamauchi vai no the great numa reserva de 53 dias com 3 trips: NY-Aveiro, aveiro-cape town, cape town-adelaide
-insert into trip values('2021-12-30',interval '2 days','AUS',23784,'JPN',2934729,'2021-12-30','2022-01-30', 40.703546, -74.006764,40.635114, -8.651154);
-insert into trip values('2022-01-01',interval '10 days','AUS',23784,'JPN',2934729,'2021-12-30','2022-01-30',40.635114, -8.651154,-33.924870,18.424055);
-insert into trip values('2022-01-11',interval '19 days','AUS',23784,'JPN',2934729,'2021-12-30','2022-01-30', -33.924870,18.424055,-34.9281805,138.5999312);
+insert into trip values('2021-12-30',2,'23784','AU','2934729','JP','2021-12-30','2022-01-30', 40.703546, -74.006764,40.635114, -8.651154);
+insert into trip values('2022-01-01',10,'23784','AU','2934729','JP','2021-12-30','2022-01-30',40.635114, -8.651154,-33.924870,18.424055);
+insert into trip values('2022-01-11',19,'23784','AU','2934729','JP','2021-12-30','2022-01-30', -33.924870,18.424055,-34.9281805,138.5999312);
 -- haruki murakami vai no seas the day durante 12 dias com duas trips: lisbon-funchal & adelaide-perth
-insert into trip values('2020-07-30',interval '2 day','ZAF',49602,'JPN',1220588,'2020-07-30','2020-08-10', 38.705276,9.146657,32.6496497,-16.9086783);
-insert into trip values('2020-08-05',interval '4 day','ZAF',49602,'JPN',1220588,'2020-07-30','2020-08-10', -34.9281805,138.5999312,-31.950527,115.860458);
+insert into trip values('2020-07-30',2,'49602','ZA','1220588','JP','2020-07-30','2020-08-10', 38.705276,9.146657,32.6496497,-16.9086783);
+insert into trip values('2020-08-05',4,'49602','ZA','1220588','JP','2020-07-30','2020-08-10', -34.9281805,138.5999312,-31.950527,115.860458);
 -- armando stroll no boat Serendipity reserva de 15 dias com 4 trips: barcelona-lisboa, valencia-reykjavik, athens-kalamata & los angeles-san francisco
-insert into trip values('2022-08-10',interval '3 day','GBR', 14296,'CAN',38596665,'2022-08-10','2022-08-25', 41.385063,2.173404,38.705276,9.146657);
-insert into trip values('2022-08-13',interval '2 day','GBR', 14296,'CAN',38596665,'2022-08-10','2022-08-25', 28.521076,-81.465523,64.128288,-21.827774);
-insert into trip values('2022-08-15',interval '2 day','GBR', 14296,'CAN',38596665,'2022-08-10','2022-08-25', 37.9839412,23.7283052,37.0377582,22.1109392);
-insert into trip values('2022-08-20',interval '2 day','GBR', 14296,'CAN',38596665,'2022-08-10','2022-08-25', 33.738706, -118.266112,37.799968, -122.398026);
+insert into trip values('2022-08-10',3,'14296','GB','38596665','CA','2022-08-10','2022-08-25', 41.385063,2.173404,38.705276,9.146657);
+insert into trip values('2022-08-13',2,'14296','GB','38596665','CA','2022-08-10','2022-08-25', 28.521076,-81.465523,64.128288,-21.827774);
+insert into trip values('2022-08-15',2,'14296','GB','38596665','CA','2022-08-10','2022-08-25', 37.9839412,23.7283052,37.0377582,22.1109392);
+insert into trip values('2022-08-20',2,'14296','GB','38596665','CA','2022-08-10','2022-08-25', 33.738706, -118.266112,37.799968, -122.398026);
 
