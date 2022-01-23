@@ -7,7 +7,6 @@ form = cgi.FieldStorage()
 name = form.getvalue('name')
 id = form.getvalue('id')
 iso_code = form.getvalue('iso_code')
-birthdate = form.getvalue('birthdate')
 
 print('Content-type:text/html\n\n')
 print('<html>')
@@ -23,17 +22,19 @@ try:
         cursor = connection.cursor()
 
         # Making query
-        sql_owner = "DELETE FROM owner WHERE id=%(id)s and iso_code=%(iso_code)s";
-        sql_person = "DELETE FROM person WHERE id=%(id)s and iso_code=%(iso_code)s";
+        sql_person = "INSERT INTO person(id, name, iso_code) VALUES (%(id)s, %(name)s, %(iso_code)s)";
+        sql_sailor = "INSERT INTO owner(id, iso_code) VALUES(%(id)s, %(iso_code)s)";
 
-        data = {'id':id,'iso_code':iso_code}
+        data_person = {'id':id,'name':name,'iso_code':iso_code}
+        data_sailor = {'id':id, 'iso_code':iso_code}
+
         # The string has the {}, the variables inside format() will replace the {} 
-        print('<p>{}</p>'.format(sql_owner % data))
-        print('<p>{}</p>'.format(sql_person % data))
+        print('<p>{}</p>'.format(sql_person % data_person))
+        print('<p>{}</p>'.format(sql_sailor % data_sailor))
 
         # Feed the data to the SQL query as follows to avoid SQL injection 
-        cursor.execute(sql_owner, data)
-        cursor.execute(sql_person, data)
+        cursor.execute(sql_person, data_person)
+        cursor.execute(sql_sailor, data_sailor)
 
         # Commit the update (without this step the database will not change) 
         connection.commit()
