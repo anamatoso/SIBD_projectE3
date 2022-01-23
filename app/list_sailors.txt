@@ -18,7 +18,6 @@ try:
 
         # Making query
         sql = "SELECT * FROM sailor";
-        print('<p>{}</p>'.format(sql))
         cursor.execute(sql)
         result = cursor.fetchall()
         num = len(result)
