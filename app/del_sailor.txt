@@ -15,7 +15,7 @@ print('<form action="del_sailor_update.cgi" method="post">')
 
 # Information on the new owner will be inserted here
 print('<p>ID: <input type="text" name="id"/></p>') 
-print('<p>Country ISO code: <input type="text" name="iso_code"/><\p>')
+print('<p>Country ISO code: <input type="text" name="iso_code"/></p>')
 
 # Submit
 print('<p><input type="submit" value="Submit"/></p>') 
