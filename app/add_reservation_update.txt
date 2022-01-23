@@ -25,7 +25,7 @@ try:
         cursor = connection.cursor()
 
         # Making query
-        sql = "INSERT INTO reservation(cni,iso_code_boat, id_sailor,iso_code_sailor,start_date,end_date) VALUES (%(cni)s, %(iso_code_boat)s, %(id_sailor)s,%(iso_c>
+        sql = "INSERT INTO reservation(cni,iso_code_boat, id_sailor,iso_code_sailor,start_date,end_date) VALUES (%(cni)s, %(iso_code_boat)s, %(id_sailor)s,%(iso_code_sailor)s,%(start_date)s,%(end_date)s)";
 
         data = {'cni':cni,'iso_code_boat':iso_code_boat,'id_sailor':id_sailor,'iso_code_sailor':iso_code_sailor,'start_date':start_date,'end_date':end_date}
 
