@@ -18,10 +18,10 @@ DROP TABLE IF EXISTS country;
 --CREATE SCHEMA schema_part3;
 
 -- Mudar schema atual para schema do projeto
-SET search_path TO schema_part3;
+--SET search_path TO schema_part3;
 
 -- Mostrar schema atual
-SHOW search_path;
+--SHOW search_path;
 
 CREATE TABLE country
 (
@@ -152,3 +152,5 @@ CREATE TABLE trip
     FOREIGN KEY (start_latitude, start_longitude) REFERENCES location (latitude, longitude),
     FOREIGN KEY (end_latitude, end_longitude) REFERENCES location (latitude, longitude)
 );
+
+
