@@ -17,6 +17,8 @@ insert into country values('tinyurl.com/4n6tdfba','Canada','CA');
 
 
 -- Populate Location (correct)
+START TRANSACTION;
+SET CONSTRAINTS ALL DEFERRED;
 insert into location values ('Lisbon', 38.705276,9.146657,'PT'); insert into marina values (38.705276,9.146657);
 insert into location values ('Cape Town',-33.924870,18.424055,'ZA'); insert into port values (-33.924870,18.424055);
 insert into location values ('Porto',41.157844,-8.629105,'PT'); insert into wharf values (41.157844,-8.629105);
@@ -55,6 +57,7 @@ insert into location values ('Maputo',-25.966213,32.56745,'MZ'); insert into por
 insert into location values ('Dubai',25.2653471,55.2924914,'AE'); insert into marina values (25.2653471,55.2924914);
 insert into location values ('Abu Dhabi',24.4538352,54.3774014,'AE'); insert into marina values (24.4538352,54.3774014);
 insert into location values ('Toronto',43.6534817,-79.3839347,'CA'); insert into marina values (43.6534817,-79.3839347);
+COMMIT;
 
 
 --Populate Person (correct)
