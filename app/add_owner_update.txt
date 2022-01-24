@@ -30,12 +30,17 @@ try:
         data_owner = {'id':id, 'iso_code':iso_code,'birthdate':birthdate}
 
         # The string has the {}, the variables inside format() will replace the {} 
-        print('<p>{}</p>'.format(sql_person % data_person))
-        print('<p>{}</p>'.format(sql_owner % data_owner))
+        #print('<p>{}</p>'.format(sql_person % data_person))
+        #print('<p>{}</p>'.format(sql_owner % data_owner))
+	print('Owner added successfully.')	
 
         # Feed the data to the SQL query as follows to avoid SQL injection 
         cursor.execute(sql_person, data_person)
         cursor.execute(sql_owner, data_owner)
+
+	# Go back to homepage or add other 
+        print('<p><a href="homepage.cgi">Return to Homepage</a></p>')
+        print('<p><a href="add_owner.cgi">Register another owner</a></p>')
 
         # Commit the update (without this step the database will not change) 
         connection.commit()
