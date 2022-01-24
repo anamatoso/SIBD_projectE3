@@ -9,6 +9,7 @@ print('<head>')
 print('<title>Boat Management System</title>')
 print('</head>')
 print('<body>')
+print('<h3>Remove boat</h3>')
 
 # The form will send the info needed for the SQL query
 print('<form action="del_boat_update.cgi" method="post">')
