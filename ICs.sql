@@ -13,7 +13,7 @@ BEGIN
         FETCH cursor_reservation INTO reserva;
         IF reserva IS NULL THEN
             EXIT;
-        ELSIF (new.start_date <= reserva.end_date) AND (new.end_date >= reserva.start_date) THEN
+        ELSIF (new.start_date <= reserva.end_date) AND (new.end_date >= reserva.start_date) and reserva.iso_code_boat=new.iso_code_boat and reserva.cni=new.cni THEN
             RAISE EXCEPTION 'Reservation_Overlap' USING HINT ='The reservation overlaps with another on the data base';
         END IF;
     END LOOP;
@@ -27,7 +27,7 @@ CREATE TRIGGER tg_insert_reservation
 BEFORE INSERT OR UPDATE ON reservation
 FOR EACH ROW EXECUTE PROCEDURE tg_insert_reservation_proc();
 
---IC2
+--IC2 verificar mandatory especialization in location
 CREATE OR REPLACE FUNCTION verify_location()
 RETURNS TRIGGER AS
 $$
