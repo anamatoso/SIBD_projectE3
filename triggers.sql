@@ -1,6 +1,6 @@
 -- TRIGGERS to ensure the app functions properly
 
--- allow inserting a person that is both owner and sailor
+-- verify if sailor is already owner (aka in table person) before inserting
 CREATE OR REPLACE FUNCTION chk_sailor_proc() RETURNS TRIGGER AS
 $$
 BEGIN
@@ -14,3 +14,8 @@ $$ LANGUAGE plpgsql;
 CREATE TRIGGER chk_sailor
 BEFORE INSERT ON sailor
 FOR EACH ROW EXECUTE PROCEDURE chk_sailor_proc();
+
+
+-- verify if owner is already sailor (aka in table person) before inserting
+-- verify if sailor is also owner (aka in table person) before deleting
+-- verify if owner is also sailor (aka in table person) before deleting
