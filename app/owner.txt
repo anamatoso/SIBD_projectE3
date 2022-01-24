@@ -17,6 +17,7 @@ try:
         # List options to user: add or remove owners
         print('<p><a href="add_owner.cgi">Add owner</a></p>')
         print('<p><a href="del_owner.cgi">Remove owner</a></p>')
+	print('<p><a href="homepage.cgi">Return to Homepage</a></p>')
 
         # Closing connection
         cursor.close() 

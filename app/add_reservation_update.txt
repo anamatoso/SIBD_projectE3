@@ -35,6 +35,10 @@ try:
         # Feed the data to the SQL query as follows to avoid SQL injection 
         cursor.execute(sql, data)
 
+	# Go back to homepage or add other 
+        print('<p><a href="homepage.cgi">Return to Homepage</a></p>')
+        print('<p><a href="add_reservation">Add another reservation</a></p>')
+
         # Commit the update (without this step the database will not change) 
         connection.commit()
 

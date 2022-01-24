@@ -16,6 +16,7 @@ try:
         # Print the register and remove buttons which will redirect to another page
         print('<p><a href="add_boat.cgi">Register Boat</a></p>')
         print('<p><a href="del_boat.cgi">Remove Boat</a></p>')
+	print('<p><a href="homepage.cgi">Return to Homepage</a></p>')
 
 except Exception as e:
         # Print errors on the webpage if they occur

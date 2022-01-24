@@ -18,7 +18,9 @@ try:
         print('<p><a href="add_sailor.cgi">Register sailor</a></p>')
         print('<p><a href="del_sailor.cgi">Remove sailor</a></p>')
         print('<p><a href="list_sailors.cgi">List sailors</a></p>')
-        # Closing connection
+	print('<p><a href="homepage.cgi">Return to Homepage</a></p>')
+        
+	# Closing connection
         cursor.close() 
 
 except Exception as e:
