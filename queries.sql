@@ -28,13 +28,13 @@ where not exists (
         from trip t
         where t.id_sailor = s.id_sailor and t.iso_code_sailor = s.iso_code_sailor));
 
--- 4.
+-- 4. List the sailors with the most trips along with their reservations
 select id_sailor, iso_code_sailor, cni, iso_code_boat, start_date, end_date, count((date, cni, iso_code_boat, id_sailor, iso_code_sailor, start_date, end_date)) as ntrips
 from trip
 group by cni, iso_code_boat, id_sailor, iso_code_sailor, start_date, end_date --reservation
 order by ntrips desc;
 
--- 5.
+-- 5.List the sailors with the longest duration of trips (sum of trip durations) for the same single reservation; display also the sum of the trip durations.
 select id_sailor,iso_code_sailor,cni,iso_code_boat,id_sailor,iso_code_sailor,start_date,end_date,sum(duration) as sum_trip
 from trip
 group by cni, iso_code_boat, id_sailor, iso_code_sailor, start_date, end_date --reservation
