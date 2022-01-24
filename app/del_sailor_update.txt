@@ -27,12 +27,17 @@ try:
 
         data = {'id':id,'iso_code':iso_code}
         # The string has the {}, the variables inside format() will replace the {} 
-        print('<p>{}</p>'.format(sql_sailor % data))
-        print('<p>{}</p>'.format(sql_person % data))
+        #print('<p>{}</p>'.format(sql_sailor % data))
+        #print('<p>{}</p>'.format(sql_person % data))
+	print('Sailor removed successfully.')
 
         # Feed the data to the SQL query as follows to avoid SQL injection 
         cursor.execute(sql_sailor, data)
         cursor.execute(sql_person, data)
+
+	# Go back to homepage or add other 
+        print('<p><a href="homepage.cgi">Return to Homepage</a></p>')
+        print('<p><a href="del_sailor">Remove another sailor</a></p>')
 
         # Commit the update (without this step the database will not change) 
         connection.commit()

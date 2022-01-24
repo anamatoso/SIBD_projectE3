@@ -23,6 +23,7 @@ DROP TABLE IF EXISTS country;
 -- Mostrar schema atual
 --SHOW search_path;
 
+
 CREATE TABLE country
 (
     flag     VARCHAR(150) UNIQUE NOT NULL,
@@ -152,5 +153,3 @@ CREATE TABLE trip
     FOREIGN KEY (start_latitude, start_longitude) REFERENCES location (latitude, longitude),
     FOREIGN KEY (end_latitude, end_longitude) REFERENCES location (latitude, longitude)
 );
-
-
