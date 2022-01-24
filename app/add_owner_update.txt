@@ -31,12 +31,12 @@ try:
 
         # The string has the {}, the variables inside format() will replace the {} 
         #print('<p>{}</p>'.format(sql_person % data_person))
-        #print('<p>{}</p>'.format(sql_owner % data_owner))
-	print('Owner added successfully.')	
+        #print('<p>{}</p>'.format(sql_owner % data_owner))	
 
         # Feed the data to the SQL query as follows to avoid SQL injection 
         cursor.execute(sql_person, data_person)
         cursor.execute(sql_owner, data_owner)
+	print('Owner added successfully.')
 
 	# Go back to homepage or add other 
         print('<p><a href="homepage.cgi">Return to Homepage</a></p>')

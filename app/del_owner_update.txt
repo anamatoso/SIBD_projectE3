@@ -30,11 +30,11 @@ try:
         # The string has the {}, the variables inside format() will replace the {} 
         #print('<p>{}</p>'.format(sql_owner % data))
         #print('<p>{}</p>'.format(sql_person % data))
-	print('Owner removed successfully.')
 
         # Feed the data to the SQL query as follows to avoid SQL injection 
         cursor.execute(sql_owner, data)
         cursor.execute(sql_person, data)
+	print('Owner removed successfully.')
 
 	# Go back to homepage or add other 
         print('<p><a href="homepage.cgi">Return to Homepage</a></p>')
