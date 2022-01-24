@@ -13,7 +13,7 @@ print('<h3>Add Reservation</h3>')
 print('<form action="add_reservation_update.cgi" method="post">') 
 
 # Information on the new owner will be inserted here
-print('<p>CNI(boat): <input type="text" name="cni"/></p>')
+print('<p>CNI (boat): <input type="text" name="cni"/></p>')
 print('<p>Country ISO code of boat: <input type="text" name="iso_code_boat"/></p>')
 print('<p>ID of Sailor: <input type="text" name="id_sailor"/></p>') 
 print('<p>Country ISO code of Sailor: <input type="text" name="iso_code_sailor"/></p>')

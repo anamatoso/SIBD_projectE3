@@ -14,9 +14,8 @@ try:
         connection = psycopg2.connect(login.credentials)
         cursor = connection.cursor()
         # Print the register and remove buttons which will redirect to another page
-        print('<td><a href="add_boat.cgi">Register Boat</a><td>')
-        print('<br><br>')
-        print('<td><a href="del_boat.cgi">Remove Boat</a><td>')
+        print('<p><a href="add_boat.cgi">Register Boat</a></p>')
+        print('<p><a href="del_boat.cgi">Remove Boat</a></p>')
 
 except Exception as e:
         # Print errors on the webpage if they occur
