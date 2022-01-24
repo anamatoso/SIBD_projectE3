@@ -32,13 +32,14 @@ CREATE OR REPLACE FUNCTION verify_location()
 RETURNS TRIGGER AS
 $$
 BEGIN
-    if (select count((NEW.latitude, new.longitude)) from (
+    if (select count(*) from (
         select latitude, longitude from wharf
         union all
         select latitude, longitude from marina
         union all
-        select latitude, longitude from port
-    ) a --vai unir as 3 tabelas com os repetidos e contar os pares (lat,long) na lista e se for diferente nenhum ou nao esta (=0) ou esta em varios (erro)
+        select latitude, longitude from port) a
+        where latitude=NEW.latitude and longitude=NEW.longitude
+        --vai unir as 3 tabelas com os repetidos e contar os pares (lat,long) na lista e se for diferente nenhum ou nao esta (=0) ou esta em varios (erro)
         ) <> 1
         then
         RAISE EXCEPTION 'The location % is not specialized in only one type of location.', new.name;
