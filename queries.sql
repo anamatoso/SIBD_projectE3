@@ -19,9 +19,9 @@ where not exists (
     except (select end_latitude,end_longitude from trip t where t.id_sailor = s.id_sailor and t.iso_code_sailor = s.iso_code_sailor));
 
 -- 4.
-select id_sailor, iso_code_sailor, cni, iso_code_boat, start_date, end_date, count(*) as ntrips
+select id_sailor, iso_code_sailor, cni, iso_code_boat, start_date, end_date, count((date, cni, iso_code_boat, id_sailor, iso_code_sailor, start_date, end_date)) as ntrips
 from trip
-group by cni, iso_code_boat, id_sailor, iso_code_sailor, start_date, end_date
+group by cni, iso_code_boat, id_sailor, iso_code_sailor, start_date, end_date --reservation
 order by ntrips desc;
 
 -- 5.
