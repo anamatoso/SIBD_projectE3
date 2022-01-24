@@ -24,7 +24,7 @@ try:
         cursor = connection.cursor()
 
         # Making query
-        sql_sailor = "DELETE FROM owner WHERE id=%(id)s and iso_code=%(iso_code)s";
+        sql_sailor = "DELETE FROM sailor WHERE id=%(id)s and iso_code=%(iso_code)s";
         sql_person = "DELETE FROM person WHERE id=%(id)s and iso_code=%(iso_code)s";
 
         data = {'id':id,'iso_code':iso_code}

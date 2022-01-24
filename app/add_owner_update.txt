@@ -25,10 +25,10 @@ try:
         cursor = connection.cursor()
 
         # Making query
-        sql_person = "INSERT INTO person(id, name, iso_code) VALUES (%(id)s, %(name)s, %(iso_code)s)";
+        #sql_person = "INSERT INTO person(id, name, iso_code) VALUES (%(id)s, %(name)s, %(iso_code)s)";
         sql_owner = "INSERT INTO owner(id, iso_code, birthdate) VALUES(%(id)s, %(iso_code)s, %(birthdate)s)";
 
-        data_person = {'id':id,'name':name,'iso_code':iso_code}
+        #data_person = {'id':id,'name':name,'iso_code':iso_code}
         data_owner = {'id':id, 'iso_code':iso_code,'birthdate':birthdate}
 
         # The string has the {}, the variables inside format() will replace the {} 
@@ -36,7 +36,7 @@ try:
         #print('<p>{}</p>'.format(sql_owner % data_owner))	
 
         # Feed the data to the SQL query as follows to avoid SQL injection 
-        cursor.execute(sql_person, data_person)
+        #cursor.execute(sql_person, data_person)
         cursor.execute(sql_owner, data_owner)
 	print('Owner added successfully.')
 
