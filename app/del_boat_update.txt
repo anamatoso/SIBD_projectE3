@@ -15,6 +15,7 @@ print('<head>')
 print('<title>Register</title>')
 print('</head>')
 print('<body>')
+print('<h3>Confirmation of Update</h3>')
 
 connection = None
 try:

@@ -17,6 +17,8 @@ print('<head>')
 print('<title>Boat Management System</title>')
 print('</head>')
 print('<body>')
+print('<h3>Confirmation of Update</h3>')
+
 
 connection = None
 try:
