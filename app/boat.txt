@@ -7,6 +7,7 @@ print('<head>')
 print('<title>Boat Management System</title>')
 print('</head>')
 print('<body>')
+print('<h3>Boat Management System</h3>')
 connection = None
 try:
         # Creating connection
