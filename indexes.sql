@@ -7,9 +7,18 @@ EXPLAIN ANALYZE SELECT boat.name
 FROM boat
     INNER JOIN country ON boat.iso_code=country.iso_code
 WHERE year >= 2015 AND country.name = 'Portugal';
--- planning time: 0.259 ms
--- execution time: 0.088 ms
--- seq san on country + bitmap heap scan on boat
+-- Hash Join  (cost=1.20..2.57 rows=1 width=11) (actual time=0.046..0.084 rows=2 loops=1)
+--   Hash Cond: (boat.iso_code = country.iso_code)
+--   ->  Seq Scan on boat  (cost=0.00..1.31 rows=16 width=14) (actual time=0.013..0.032 rows=16 loops=1)
+--         Filter: (year >= 2015)
+--         Rows Removed by Filter: 9
+--   ->  Hash  (cost=1.19..1.19 rows=1 width=3) (actual time=0.016..0.019 rows=1 loops=1)
+--         Buckets: 1024  Batches: 1  Memory Usage: 9kB
+--         ->  Seq Scan on country  (cost=0.00..1.19 rows=1 width=3) (actual time=0.007..0.011 rows=1 loops=1)
+--               Filter: ((name)::text = 'Portugal'::text)
+--               Rows Removed by Filter: 14
+-- Planning Time: 0.376 ms
+-- Execution Time: 0.122 ms
 
 -- For this query, there are two attributes being searched: year and country name. For the year attribute, the query is
 -- a range query (all boats registered from <some year> onwards. Thus, a B-tree index is the most appropriate, since it
@@ -21,13 +30,20 @@ CREATE INDEX year_idx ON boat(year); --b-tree index on boat.year
 -- planning time: 0.269 ms (same)
 -- execution time: 0.097 ms (same)
 DROP INDEX year_idx;
--- seq san on country + bitmap heap scan on boat
+-- same
 
 CREATE INDEX name_idx ON country USING HASH (name); --hash index on country.name
 -- planning time: 0.269 ms (same)
 -- execution time: 0.089 ms (same)
 DROP INDEX name_idx;
--- seq san on country + bitmap heap scan on boat
+-- same
+
+-- b-tree index can also be used to find specific values
+CREATE INDEX name2_idx ON country(name); --hash index on country.name
+-- planning time: 0.269 ms (same)
+-- execution time: 0.089 ms (same)
+DROP INDEX name2_idx;
+-- same
 
 -- using both indexes
 -- planning time: 0.270 ms (same)
@@ -67,6 +83,7 @@ CREATE INDEX name_idx ON account USING HASH (branch_name); -- worked!!
 DROP INDEX name_idx;
 
 -- NOTE: if we use both, only the hash index is actually used, as expected.
+-- ALSO: original query doesn't use the same mechanism
 -- CONCLUSION: for some reason, using the b-treee isn't useful even it if it a range query. however, the hash index is
 -- indeed helpful to search for specific values.
 
@@ -76,9 +93,16 @@ EXPLAIN ANALYSE SELECT count(*)
 FROM trip
     INNER JOIN location ON trip.end_latitude=location.latitude AND trip.end_longitude=location.longitude
 WHERE start_date BETWEEN '2015-08-10' AND '2017-12-12' AND location.name LIKE '%SOME_PATTERN%';
--- planning time: 0.301 ms
--- execution time: 0.085 ms
--- seq scan on location + bitmap heap scan on trip
+-- Aggregate  (cost=2.69..2.70 rows=1 width=8) (actual time=0.024..0.030 rows=1 loops=1)
+--   ->  Nested Loop  (cost=0.00..2.69 rows=1 width=0) (actual time=0.019..0.022 rows=0 loops=1)
+--         Join Filter: ((trip.end_latitude = location.latitude) AND (trip.end_longitude = location.longitude))
+--         ->  Seq Scan on trip  (cost=0.00..1.20 rows=1 width=18) (actual time=0.016..0.017 rows=0 loops=1)
+--               Filter: ((start_date >= '2015-08-10'::date) AND (start_date <= '2017-12-12'::date))
+--               Rows Removed by Filter: 13
+--         ->  Seq Scan on location  (cost=0.00..1.48 rows=1 width=17) (never executed)
+--               Filter: ((name)::text ~~ '%SOME_PATTERN%'::text)
+-- Planning Time: 0.398 ms
+-- Execution Time: 0.077 ms
 
 -- For this query, there are two attributes being searched: start date and location name. For the start date attribute,
 -- we have a range query, which indicates the most adequate index would be a B-tree index. For the location attribute, a
@@ -92,20 +116,21 @@ CREATE INDEX start_date_idx ON trip(start_date);
 -- planning time: 0.509 ms (same)
 -- execution time: 0.106 ms (same)
 DROP INDEX start_date_idx;
--- seq scan on location + bitmap heap scan on trip
+-- same
 
 -- testing hash and b-tree for location
 -- NOTE: this aren't supposed to help, it was just to confirm. And the indexes still didn't help in the account example.
 CREATE INDEX loc_b_idx ON location(name);
-DROP INDEX loc_b_idx;
 -- planning time: 0.517 ms (same)
 -- execution time: 0.085 ms (same)
--- seq scan on location + bitmap heap scan on trip
+DROP INDEX loc_b_idx;
+-- same
+
 CREATE INDEX loc_hash_idx ON location USING HASH (name);
-DROP INDEX loc_hash_idx;
 -- planning time: 0.416 ms (same)
 -- execution time: 0.081 ms (same)
--- seq scan on location + bitmap heap scan on trip
+DROP INDEX loc_hash_idx;
+-- same
 
 -- Using overloaded account to test indexes
 EXPLAIN ANALYSE SELECT count(*)
@@ -126,6 +151,7 @@ CREATE INDEX balance_idx ON account(balance);
 -- Planning Time: 0.301 ms
 -- Execution Time: 61.136 ms
 DROP INDEX balance_idx;
+-- same
 
 -- testing hash and b-tree for location
 CREATE INDEX branch_idx ON account(branch_name);
@@ -136,7 +162,7 @@ CREATE INDEX branch_idx ON account(branch_name);
 -- Planning Time: 0.286 ms
 -- Execution Time: 66.575 ms
 DROP INDEX branch_idx;
-
+-- same
 
 CREATE INDEX branch2_idx ON account USING HASH (branch_name);
 -- Aggregate  (cost=2473.84..2473.85 rows=1 width=8) (actual time=58.289..58.292 rows=1 loops=1)
@@ -146,3 +172,4 @@ CREATE INDEX branch2_idx ON account USING HASH (branch_name);
 -- Planning Time: 0.268 ms
 -- Execution Time: 58.329 ms
 DROP INDEX branch2_idx;
+-- same
