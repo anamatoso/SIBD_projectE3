@@ -36,6 +36,40 @@ DROP INDEX name_idx;
 
 -- Using indexes didn't make any difference since it ignored them in any case.
 
+-- used overloaded account (from bank) table to test indexes:
+EXPLAIN ANALYZE SELECT branch_name
+FROM account
+WHERE balance >= 2000 AND branch_name = 'Downtown';
+-- Seq Scan on account  (cost=0.00..2181.00 rows=8323 width=9) (actual time=0.019..32.176 rows=8376 loops=1)
+-- Filter: ((balance >= '2000'::numeric) AND ((branch_name)::text = 'Downtown'::text))
+-- Rows Removed by Filter: 91624
+-- Planning Time: 0.186 ms
+-- Execution Time: 37.739 ms
+
+CREATE INDEX balance_idx ON account(balance); -- didn't make a difference
+-- Seq Scan on account  (cost=0.00..2181.00 rows=8323 width=9) (actual time=0.022..35.874 rows=8376 loops=1)
+-- Filter: ((balance >= '2000'::numeric) AND ((branch_name)::text = 'Downtown'::text))
+-- Rows Removed by Filter: 91624
+-- Planning Time: 0.281 ms
+-- Execution Time: 42.046 ms
+DROP INDEX balance_idx;
+
+CREATE INDEX name_idx ON account USING HASH (branch_name); -- worked!!
+-- Bitmap Heap Scan on account  (cost=551.03..1449.94 rows=8323 width=9) (actual time=1.114..15.958 rows=8376 loops=1)
+--   Recheck Cond: ((branch_name)::text = 'Downtown'::text)
+--   Filter: (balance >= '2000'::numeric)
+--   Rows Removed by Filter: 6214
+--   Heap Blocks: exact=681
+--   ->  Bitmap Index Scan on name_idx  (cost=0.00..548.95 rows=14527 width=0) (actual time=0.965..0.966 rows=14590 loops=1)
+--         Index Cond: ((branch_name)::text = 'Downtown'::text)
+-- Planning Time: 0.168 ms
+-- Execution Time: 21.944 ms
+DROP INDEX name_idx;
+
+-- NOTE: if we use both, only the hash index is actually used, as expected.
+-- CONCLUSION: for some reason, using the b-treee isn't useful even it if it a range query. however, the hash index is
+-- indeed helpful to search for specific values.
+
 ----------------
 -- 7.2
 EXPLAIN ANALYSE SELECT count(*)
@@ -54,13 +88,14 @@ WHERE start_date BETWEEN '2015-08-10' AND '2017-12-12' AND location.name LIKE '%
 -- query's execution time.
 -- Reference: https://www.viralpatel.net/oracle-index-usage-like-operator-domain-indexes/
 
-CREATE INDEX start_date_idx ON trip(start_date); --b-tree index on boat.year
+CREATE INDEX start_date_idx ON trip(start_date);
 -- planning time: 0.509 ms (same)
 -- execution time: 0.106 ms (same)
 DROP INDEX start_date_idx;
 -- seq scan on location + bitmap heap scan on trip
 
 -- testing hash and b-tree for location
+-- NOTE: this aren't supposed to help, it was just to confirm. And the indexes still didn't help in the account example.
 CREATE INDEX loc_b_idx ON location(name);
 DROP INDEX loc_b_idx;
 -- planning time: 0.517 ms (same)
@@ -71,3 +106,43 @@ DROP INDEX loc_hash_idx;
 -- planning time: 0.416 ms (same)
 -- execution time: 0.081 ms (same)
 -- seq scan on location + bitmap heap scan on trip
+
+-- Using overloaded account to test indexes
+EXPLAIN ANALYSE SELECT count(*)
+FROM account
+WHERE balance BETWEEN 1000 AND 4000 AND branch_name LIKE '%tr%';
+-- Aggregate  (cost=2473.84..2473.85 rows=1 width=8) (actual time=60.869..60.873 rows=1 loops=1)
+--   ->  Seq Scan on account  (cost=0.00..2431.00 rows=17135 width=0) (actual time=0.025..48.961 rows=17057 loops=1)
+--         Filter: ((balance >= '1000'::numeric) AND (balance <= '4000'::numeric) AND ((branch_name)::text ~~ '%tr%'::text))
+--         Rows Removed by Filter: 82943
+-- Planning Time: 0.199 ms
+-- Execution Time: 60.954 ms
+
+CREATE INDEX balance_idx ON account(balance);
+-- Aggregate  (cost=2473.84..2473.85 rows=1 width=8) (actual time=61.096..61.099 rows=1 loops=1)
+--   ->  Seq Scan on account  (cost=0.00..2431.00 rows=17135 width=0) (actual time=0.028..49.151 rows=17057 loops=1)
+--         Filter: ((balance >= '1000'::numeric) AND (balance <= '4000'::numeric) AND ((branch_name)::text ~~ '%tr%'::text))
+--         Rows Removed by Filter: 82943
+-- Planning Time: 0.301 ms
+-- Execution Time: 61.136 ms
+DROP INDEX balance_idx;
+
+-- testing hash and b-tree for location
+CREATE INDEX branch_idx ON account(branch_name);
+-- Aggregate  (cost=2473.84..2473.85 rows=1 width=8) (actual time=66.535..66.538 rows=1 loops=1)
+--   ->  Seq Scan on account  (cost=0.00..2431.00 rows=17135 width=0) (actual time=0.028..53.416 rows=17057 loops=1)
+--         Filter: ((balance >= '1000'::numeric) AND (balance <= '4000'::numeric) AND ((branch_name)::text ~~ '%tr%'::text))
+--         Rows Removed by Filter: 82943
+-- Planning Time: 0.286 ms
+-- Execution Time: 66.575 ms
+DROP INDEX branch_idx;
+
+
+CREATE INDEX branch2_idx ON account USING HASH (branch_name);
+-- Aggregate  (cost=2473.84..2473.85 rows=1 width=8) (actual time=58.289..58.292 rows=1 loops=1)
+--   ->  Seq Scan on account  (cost=0.00..2431.00 rows=17135 width=0) (actual time=0.025..46.759 rows=17057 loops=1)
+--         Filter: ((balance >= '1000'::numeric) AND (balance <= '4000'::numeric) AND ((branch_name)::text ~~ '%tr%'::text))
+--         Rows Removed by Filter: 82943
+-- Planning Time: 0.268 ms
+-- Execution Time: 58.329 ms
+DROP INDEX branch2_idx;
