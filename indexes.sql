@@ -55,7 +55,7 @@ DROP INDEX name2_idx;
 -- used overloaded account (from bank) table to test indexes:
 EXPLAIN ANALYZE SELECT branch_name
 FROM account
-WHERE balance >= 2000 AND branch_name = 'Downtown';
+WHERE balance >= 7000 AND branch_name = 'Downtown';
 -- Seq Scan on account  (cost=0.00..2181.00 rows=8323 width=9) (actual time=0.019..32.176 rows=8376 loops=1)
 -- Filter: ((balance >= '2000'::numeric) AND ((branch_name)::text = 'Downtown'::text))
 -- Rows Removed by Filter: 91624
@@ -103,6 +103,8 @@ WHERE start_date BETWEEN '2015-08-10' AND '2017-12-12' AND location.name LIKE '%
 --               Filter: ((name)::text ~~ '%SOME_PATTERN%'::text)
 -- Planning Time: 0.398 ms
 -- Execution Time: 0.077 ms
+
+-- composite b-tree index: location.name, start_date
 
 -- For this query, there are two attributes being searched: start date and location name. For the start date attribute,
 -- we have a range query, which indicates the most adequate index would be a B-tree index. For the location attribute, a

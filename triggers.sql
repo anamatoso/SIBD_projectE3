@@ -5,10 +5,9 @@ CREATE OR REPLACE FUNCTION chk_person_proc() RETURNS TRIGGER AS
 $$
 BEGIN
     IF (NEW.id,NEW.iso_code) IN (SELECT id,iso_code FROM person) THEN
-        RETURN OLD;
-    ELSE
-        RETURN NEW;
+        RETURN NULL;
     END IF;
+    RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
 

@@ -237,3 +237,4 @@ insert into person values (1544, 'Inês','PT'); insert into sailor values (1544,
 insert into boat values ('Arana', 2022, 1544, 'MZ', 12345,'PT');
 insert into boat values ('Aveiro', 1987, 19023, 'IT', 12345,'PT');
 insert into boat values ('Maresia', 2002, 16025, 'IT', 12345,'PT');
+insert into person values (154497, 'Tomás','PT'); insert into sailor values (154497,'PT');
