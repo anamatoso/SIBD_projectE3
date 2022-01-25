@@ -1,19 +1,21 @@
 -- TRIGGERS to ensure the app functions properly
 
 -- verify if sailor is already owner (aka in table person) before inserting
-CREATE OR REPLACE FUNCTION chk_sailor_proc() RETURNS TRIGGER AS
+CREATE OR REPLACE FUNCTION chk_person_proc() RETURNS TRIGGER AS
 $$
 BEGIN
     IF (NEW.id,NEW.iso_code) IN (SELECT id,iso_code FROM person) THEN
-        INSERT INTO person VALUES(id, name, iso_code);
+        RETURN OLD;
+    ELSE
+        RETURN NEW;
     END IF;
-    RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE TRIGGER chk_sailor
+DROP TRIGGER chk_person ON person;
+CREATE TRIGGER chk_person
 BEFORE INSERT ON person
-FOR EACH ROW EXECUTE PROCEDURE chk_sailor_proc();
+FOR EACH ROW EXECUTE PROCEDURE chk_person_proc();
 
 -- old
 CREATE OR REPLACE FUNCTION chk_sailor_proc() RETURNS TRIGGER AS
