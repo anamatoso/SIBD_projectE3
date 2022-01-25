@@ -231,3 +231,9 @@ insert into trip values('2022-08-13',2,'14296','GB','38596665','CA','2022-08-10'
 insert into trip values('2022-08-15',2,'14296','GB','38596665','CA','2022-08-10','2022-08-25', 37.9839412,23.7283052,37.0377582,22.1109392);
 insert into trip values('2022-08-20',2,'14296','GB','38596665','CA','2022-08-10','2022-08-25', 33.738706, -118.266112,37.799968, -122.398026);
 
+-- ADDED LATER FOR QUERIES
+insert into person values (12345,'Teresa','PT'); insert into owner values (12345,'PT','10-08-1971');
+insert into person values (1544, 'Inês','PT'); insert into sailor values (1544,'PT');
+insert into boat values ('Arana', 2022, 1544, 'MZ', 12345,'PT');
+insert into boat values ('Aveiro', 1987, 19023, 'IT', 12345,'PT');
+insert into boat values ('Maresia', 2002, 16025, 'IT', 12345,'PT');
