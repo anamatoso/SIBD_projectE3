@@ -10,6 +10,7 @@ print('<body>')
 print('<h3>Boat Management System</h3>')
 print('<p>Welcome to the Boating Management System!</p>')
 print('<p> Here, you can add or remove boats, owners, sailors and reservations from the system, as well as list all boat sailors registered.</p>')
+print('<iframe src="https://gifer.com/embed/6b2" width=480 height=276.480 frameBorder="0" allowFullScreen align="right"></iframe>')
 connection = None
 try:
         # Creating connection
