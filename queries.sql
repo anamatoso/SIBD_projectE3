@@ -1,12 +1,15 @@
 -- Queries
 -- 1. Who is the owner with the most boats per country?
-select id_owner, iso_code_owner, iso_code, count(distinct (iso_code, cni))
-from boat
-group by id_owner, iso_code_owner, iso_code
-having count(distinct (iso_code, cni)) >= all(
-    select iso_code,count(distinct (iso_code, cni))
+select id_owner, iso_code_owner, iso_code, nboats
+from (select id_owner, iso_code_owner, iso_code, count((cni,iso_code)) as nboats
     from boat
-    group by iso_code);
+    group by id_owner, iso_code_owner, iso_code order by iso_code) f
+where nboats>= all(select nboats2
+    from (select id_owner, iso_code_owner, iso_code, count((cni,iso_code)) as nboats2
+    from boat
+    group by id_owner, iso_code_owner, iso_code order by iso_code) f2
+    where f2.iso_code=f.iso_code
+    );
 
 -- 2. List all the owners that have at least two boats in distinct countries.
 select distinct id_owner, iso_code_owner, count(distinct iso_code) as ncountry

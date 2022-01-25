@@ -8,6 +8,18 @@ from (
     group by id_owner, iso_code_owner, iso_code order by iso_code) a
 group by iso_code;
 
+select id_owner, iso_code_owner, iso_code, nboats
+from (select id_owner, iso_code_owner, iso_code, count((cni,iso_code)) as nboats
+    from boat
+    group by id_owner, iso_code_owner, iso_code order by iso_code) f
+where nboats>= all(select nboats2
+    from (select id_owner, iso_code_owner, iso_code, count((cni,iso_code)) as nboats2
+    from boat
+    group by id_owner, iso_code_owner, iso_code order by iso_code) f2
+    where f2.iso_code=f.iso_code
+    );
+
+
 --Query 2
 select id_owner, iso_code_owner, count(distinct iso_code) as nboats_distinct_country
 from boat
