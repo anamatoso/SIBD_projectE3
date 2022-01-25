@@ -3,7 +3,10 @@
 select id_owner, iso_code_owner, iso_code, count(distinct (iso_code, cni))
 from boat
 group by id_owner, iso_code_owner, iso_code
-having count(distinct (iso_code, cni)) >= all(select count(distinct (iso_code, cni)) from boat group by id_owner, iso_code_owner, iso_code);
+having count(distinct (iso_code, cni)) >= all(
+    select iso_code,count(distinct (iso_code, cni))
+    from boat
+    group by iso_code);
 
 -- 2. List all the owners that have at least two boats in distinct countries.
 select distinct id_owner, iso_code_owner, count(distinct iso_code) as ncountry
@@ -23,10 +26,7 @@ where not exists (
         select end_latitude, end_longitude
         from trip t
         where t.id_sailor = s.id_sailor and t.iso_code_sailor = s.iso_code_sailor
-        union
-        select start_latitude, start_longitude
-        from trip t
-        where t.id_sailor = s.id_sailor and t.iso_code_sailor = s.iso_code_sailor));
+));
 
 -- 4. List the sailors with the most trips along with their reservations
 select id_sailor, iso_code_sailor, cni, iso_code_boat, start_date, end_date, count((date, cni, iso_code_boat, id_sailor, iso_code_sailor, start_date, end_date)) as ntrips
@@ -36,7 +36,6 @@ order by ntrips desc;
 
 -- 5.List the sailors with the longest duration of trips (sum of trip durations) for the same single reservation;
 -- display also the sum of the trip durations.
---select id_sailor,iso_code_sailor,cni,iso_code_boat,start_date,end_date,sum(duration) as sum_trip
 select id_sailor, iso_code_sailor, sum(duration) as sum_trip
 from trip
 group by cni, iso_code_boat, id_sailor, iso_code_sailor, start_date, end_date --reservation

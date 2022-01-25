@@ -1,12 +1,12 @@
 --Queries
 
 --Query 1
-select id_owner, iso_code_owner, max(nboats)
+select iso_code, max(nboats)
 from (
-    select id_owner, iso_code_owner, count(cni,iso_code) as nboats
+    select id_owner, iso_code_owner, iso_code, count((cni,iso_code)) as nboats
     from boat
-    group by id_owner, iso_code_owner) a
-group by id_owner, iso_code_owner;
+    group by id_owner, iso_code_owner, iso_code order by iso_code) a
+group by iso_code;
 
 --Query 2
 select id_owner, iso_code_owner, count(distinct iso_code) as nboats_distinct_country
