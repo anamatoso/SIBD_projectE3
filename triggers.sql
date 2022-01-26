@@ -47,3 +47,35 @@ DROP TRIGGER IF EXISTS chk_owner_del ON owner;
 CREATE TRIGGER chk_owner_del
 AFTER DELETE ON owner
 FOR EACH ROW EXECUTE PROCEDURE chk_owner_del_proc();
+
+-- check if schedule is already present when adding reservation
+CREATE OR REPLACE FUNCTION chk_sch_proc() RETURNS TRIGGER AS
+$$
+BEGIN
+    IF (NEW.start_date,NEW.end_date) IN (SELECT start_date,end_date FROM schedule) THEN
+        RETURN NULL;
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+DROP TRIGGER IF EXISTS chk_sch ON reservation;
+CREATE TRIGGER chk_sch
+BEFORE INSERT ON schedule
+FOR EACH ROW EXECUTE PROCEDURE chk_sch_proc();
+
+-- delete schedule when deleting reservation
+CREATE OR REPLACE FUNCTION del_sch_proc() RETURNS TRIGGER AS
+$$
+BEGIN
+    IF (select count((new.start_date,new.end_date)) FROM reservation)>0 THEN
+        RETURN NULL;
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+DROP TRIGGER IF EXISTS del_sch ON reservation;
+CREATE TRIGGER del_sch
+before delete ON schedule
+FOR EACH ROW EXECUTE PROCEDURE del_sch_proc();
