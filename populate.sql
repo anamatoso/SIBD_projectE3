@@ -239,3 +239,29 @@ insert into boat values ('Aveiro', 1987, 19023, 'IT', 12345,'PT');
 insert into boat values ('Maresia', 2002, 16025, 'IT', 12345,'PT');
 insert into person values (154497, 'Tomás','PT'); insert into sailor values (154497,'PT');
 insert into boat values ('Titanic', 2012, 4356, 'MZ', 12345,'PT');
+
+-- 1 reservation of 20 days with the following trips: Lisbon --> Porto --> Funchal --> Aveiro --> Figueira da Foz --> Lisbon
+insert into schedule values('2021-11-09','2021-11-29');
+insert into reservation values('98237','PT','8435738','PT','2021-11-09','2021-11-29');
+insert into trip values('2021-11-09',1,'98237','PT','8435738','PT','2021-11-09','2021-11-29',38.705276,9.146657,41.157844,-8.629105);
+insert into trip values('2021-11-14',3,'98237','PT','8435738','PT','2021-11-09','2021-11-29',41.157844,-8.629105,32.6496497,-16.9086783);
+insert into trip values('2021-11-20',3,'98237','PT','8435738','PT','2021-11-09','2021-11-29',32.6496497,-16.9086783,40.635114, -8.651154);
+insert into trip values('2021-11-25',2,'98237','PT','8435738','PT','2021-11-09','2021-11-29',40.635114, -8.651154,40.147266,-8.860761);
+insert into trip values('2021-11-27',1,'98237','PT','8435738','PT','2021-11-09','2021-11-29',40.147266,-8.860761,38.705276,9.146657);
+
+
+-- 1 reservation of 30 day with the following trips: Lisbon --> Porto --> Funchal --> Aveiro --> Figueira da Foz
+insert into schedule values('2020-12-01','2020-12-31');
+insert into reservation values('98237','PT','8435738','PT','2020-12-01','2020-12-31');
+insert into trip values('2020-12-01',1,'98237','PT','8435738','PT','2021-11-09','2021-11-29',38.705276,9.146657,41.157844,-8.629105);
+insert into trip values('2020-12-10',5,'98237','PT','8435738','PT','2021-11-09','2021-11-29',41.157844,-8.629105,32.6496497,-16.9086783);
+insert into trip values('2020-12-20',3,'98237','PT','8435738','PT','2021-11-09','2021-11-29',32.6496497,-16.9086783,40.635114, -8.651154);
+insert into trip values('2020-12-25',4,'98237','PT','8435738','PT','2021-11-09','2021-11-29',40.635114, -8.651154,40.147266,-8.860761);
+insert into trip values('2020-12-29',1,'98237','PT','8435738','PT','2021-11-09','2021-11-29',40.147266,-8.860761,38.705276,9.146657);
+
+
+-- 1 reservation of 15 days with the following trips: Barcelona --> Kardiff --> Athens
+insert into schedule values('2022-03-15','2022-03-30');
+insert into reservation values('839','AR','23874876','IT','2022-03-15','2022-03-30');
+insert into trip values('2022-03-15',3,'839','AR','23874876','IT','2022-03-15','2022-03-30',41.385063,2.173404,51.4816546,-3.1791934);
+insert into trip values('2022-03-22',5,'839','AR','23874876','IT','2022-03-15','2022-03-30',51.4816546,-3.1791934,37.9839412,23.7283052);
