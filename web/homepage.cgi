@@ -14,25 +14,25 @@ print('<iframe src="https://gifer.com/embed/6b2" width=480 height=276.480 frameB
 connection = None
 try:
         # Creating connection
-        connection = psycopg2.connect(login.credentials) 
-        cursor = connection.cursor()
+	connection = psycopg2.connect(login.credentials)
+	cursor = connection.cursor()
 
         # List options to user: add or remove owners
-        print('<p><a href="owner.cgi">Register or remove owners</a></p>')
-        print('<p><a href="boat.cgi">Register or remove boats</a></p>')
-        print('<p><a href="sailor.cgi">Insert, list and remove boat sailors</a></p>')
-        print('<p><a href="reservations.cgi">Create and remove reservations</a></p>')
+	print('<p><a href="owner.cgi">Register or remove owners</a></p>')
+	print('<p><a href="boat.cgi">Register or remove boats</a></p>')
+	print('<p><a href="sailor.cgi">Insert, list and remove boat sailors</a></p>')
+	print('<p><a href="reservations.cgi">Create and remove reservations</a></p>')
 
         # Closing connection
-        cursor.close() 
+	cursor.close() 
 
 except Exception as e:
         # Print errors on the webpage if they occur 
-        print('<h1>An error occurred.</h1>') 
-        #print('<p>{}</p>'.format(e))
+	print('<h1>An error occurred.</h1>') 
+	#print('<p>{}</p>'.format(e))
 finally:
-        if connection is not None:
-                connection.close()
+	if connection is not None:
+		connection.close()
 
 print('</body>')
 print('</html>')

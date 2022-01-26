@@ -19,42 +19,42 @@ print('</head>')
 print('<body>')
 print('<h3>Confirmation of Update</h3>')
 
-
 connection = None
 try:
         # Creating connection
-        connection = psycopg2.connect(login.credentials)
-        cursor = connection.cursor()
+	connection = psycopg2.connect(login.credentials)
+	cursor = connection.cursor()
 
         # Making query
-      	sql_trip = "DELETE FROM trip WHERE cni=%(cni)s AND iso_code_boat=%(iso_code_boat)s AND id_sailor=%(id_sailor)s AND iso_code_sailor=%(iso_code_sailor)s AND start_date=%(star>
-        sql_reservation = "DELETE FROM reservation WHERE cni=%(cni)s AND iso_code_boat=%(iso_code_boat)s AND id_sailor=%(id_sailor)s AND iso_code_sailor=%(iso_code_sailor)s AND sta>
-        sql_schedule = "DELETE FROM schedule WHERE start_date=%(start_date)s AND end_date=%(end_date)s";
-        ata = {'cni':cni,'iso_code_boat':iso_code_boat,'id_sailor':id_sailor,'iso_code_sailor':iso_code_sailor,'start_date':start_date,'end_date':end_date}
-        data_schedule = {'start_date':start_date,'end_date':end_date}
+	sql_trip = "DELETE FROM trip WHERE cni=%(cni)s AND iso_code_boat=%(iso_code_boat)s AND id_sailor=%(id_sailor)s AND iso_code_sailor=%(iso_code_sailor)s AND start_date=%(start_date)s AND end_date=%(end_date)s";
+	sql_reservation = "DELETE FROM reservation WHERE cni=%(cni)s AND iso_code_boat=%(iso_code_boat)s AND id_sailor=%(id_sailor)s AND iso_code_sailor=%(iso_code_sailor)s AND start_date=%(start_date)s AND end_date=%(end_date)s";
+	sql_schedule = "DELETE FROM schedule WHERE start_date=%(start_date)s AND end_date=%(end_date)s";
+	data = {'cni':cni,'iso_code_boat':iso_code_boat,'id_sailor':id_sailor,'iso_code_sailor':iso_code_sailor,'start_date':start_date,'end_date':end_date}
+	data_schedule = {'start_date':start_date,'end_date':end_date}
 
         # Feed the data to the SQL query as follows to avoid SQL injection
-        cursor.execute(sql_trip, data)
-        cursor.execute(sql_reservation, data)
+	cursor.execute(sql_trip, data)
+	cursor.execute(sql_reservation, data)
 	cursor.execute(sql_schedule, data_schedule)
 	print('Reservation removed successfully.')
+
 	# Go back to homepage or add other 
-        print('<p><a href="del_reservation.cgi">Remove another reservation</a></p>')
+	print('<p><a href="del_reservation.cgi">Remove another reservation</a></p>')
 	print('<p><a href="homepage.cgi">Return to Homepage</a></p>')
 
         # Commit the update (without this step the database will not change)
-        connection.commit()
+	connection.commit()
 
         # Closing connection
-        cursor.close()
+	cursor.close()
 
 except Exception as e:
         # Print errors on the webpage if they occur
-        print('<h1>An error occurred.</h1>')
-        #print('<p>{}</p>'.format(e))
+	print('<h1>An error occurred.</h1>')
+	#print('<p>{}</p>'.format(e))
 	print('<p> Please try again. Check if the values you wrote are valid.</p>')
 finally:
-        if connection is not None:
-                connection.close()
+	if connection is not None:
+		connection.close()
 print('</body>')
 print('</html>')

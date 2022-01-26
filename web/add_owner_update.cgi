@@ -17,42 +17,42 @@ print('</head>')
 print('<body>')
 print('<h3>Confirmation of Update</h3>')
 
-
 connection = None 
 try:
         # Creating connection
-        connection = psycopg2.connect(login.credentials) 
-        cursor = connection.cursor()
+	connection = psycopg2.connect(login.credentials) 
+	cursor = connection.cursor()
 
         # Making query
-        sql_person = "INSERT INTO person(id, name, iso_code) VALUES (%(id)s, %(name)s, %(iso_code)s)";
-        sql_owner = "INSERT INTO owner(id, iso_code, birthdate) VALUES(%(id)s, %(iso_code)s, %(birthdate)s)";
+	sql_person = "INSERT INTO person(id, name, iso_code) VALUES (%(id)s, %(name)s, %(iso_code)s)";
+	sql_owner = "INSERT INTO owner(id, iso_code, birthdate) VALUES(%(id)s, %(iso_code)s, %(birthdate)s)";
 
-        data_person = {'id':id,'name':name,'iso_code':iso_code}
-        data_owner = {'id':id, 'iso_code':iso_code,'birthdate':birthdate}
+	data_person = {'id':id,'name':name,'iso_code':iso_code}
+	data_owner = {'id':id, 'iso_code':iso_code,'birthdate':birthdate}
 
         # Feed the data to the SQL query as follows to avoid SQL injection 
-        cursor.execute(sql_person, data_person)
-        cursor.execute(sql_owner, data_owner)
+	cursor.execute(sql_person, data_person)
+	cursor.execute(sql_owner, data_owner)
 	print('Owner added successfully.')
 
 	# Go back to homepage or add other 
-        print('<p><a href="add_owner.cgi">Register another owner</a></p>')
-        print('<p><a href="homepage.cgi">Return to Homepage</a></p>')
+	print('<p><a href="add_owner.cgi">Register another owner</a></p>')
+	print('<p><a href="homepage.cgi">Return to Homepage</a></p>')
 
         # Commit the update (without this step the database will not change) 
-        connection.commit()
+	connection.commit()
 
         # Closing connection
-        cursor.close()
+	cursor.close()
 
 except Exception as e:
         # Print errors on the webpage if they occur 
-        print('<h1>An error occurred.</h1>') 
-        #print('<p>{}</p>'.format(e))
+	print('<h1>An error occurred.</h1>') 
+	#print('<p>{}</p>'.format(e))
 	print('<p> Please try again. Check if the values you wrote are valid.</p>')
 finally:
-        if connection is not None:
-                connection.close()
+	if connection is not None:
+		connection.close()
 print('</body>')
 print('</html>')
+
