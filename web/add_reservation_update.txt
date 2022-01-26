@@ -31,15 +31,12 @@ try:
 
         data = {'cni':cni,'iso_code_boat':iso_code_boat,'id_sailor':id_sailor,'iso_code_sailor':iso_code_sailor,'start_date':start_date,'end_date':end_date}
 
-        # The string has the {}, the variables inside format() will replace the {} 
-        print('<p>{}</p>'.format(sql % data))
-
         # Feed the data to the SQL query as follows to avoid SQL injection 
         cursor.execute(sql, data)
 
 	# Go back to homepage or add other 
-        print('<p><a href="homepage.cgi">Return to Homepage</a></p>')
         print('<p><a href="add_reservation">Add another reservation</a></p>')
+	print('<p><a href="homepage.cgi">Return to Homepage</a></p>')
 
         # Commit the update (without this step the database will not change) 
         connection.commit()

@@ -36,8 +36,8 @@ try:
 
         print('Boat deleted successfully.')
 
-	print('<p><a href="homepage.cgi">Return to Homepage</a></p>')
 	print('<p><a href="del_boat.cgi">Remove another Boat</a></p>')
+	print('<p><a href="homepage.cgi">Return to Homepage</a></p>')
 
         # Commit the update (without this step the database will not change)
         connection.commit()

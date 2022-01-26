@@ -29,9 +29,6 @@ try:
         sql_person = "DELETE FROM person WHERE id=%(id)s and iso_code=%(iso_code)s";
 
         data = {'id':id,'iso_code':iso_code}
-        # The string has the {}, the variables inside format() will replace the {} 
-        #print('<p>{}</p>'.format(sql_owner % data))
-        #print('<p>{}</p>'.format(sql_person % data))
 
         # Feed the data to the SQL query as follows to avoid SQL injection 
         cursor.execute(sql_owner, data)
@@ -39,8 +36,8 @@ try:
 	print('Owner removed successfully.')
 
 	# Go back to homepage or add other 
-        print('<p><a href="homepage.cgi">Return to Homepage</a></p>')
         print('<p><a href="del_owner.cgi">Remove another owner</a></p>')
+	print('<p><a href="homepage.cgi">Return to Homepage</a></p>')
 
         # Commit the update (without this step the database will not change) 
         connection.commit()
