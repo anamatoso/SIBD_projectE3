@@ -23,6 +23,7 @@ try:
 	num = len(result)
 
         # Displaying results
+	print('<p><a href="homepage.cgi">Return to Homepage</a></p>')
 	print('<p>Number of sailors registered: {}</p>'.format(num))
 	print('<table border="1" cellspacing="0" style="width:15%;">') 
 	print('<tr><th style="text-align:center">ID</th><th style="text-align:center">ISO Code</th></tr>')
