@@ -59,7 +59,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-DROP TRIGGER IF EXISTS chk_sch ON reservation;
+DROP TRIGGER IF EXISTS chk_sch ON schedule;
 CREATE TRIGGER chk_sch
 BEFORE INSERT ON schedule
 FOR EACH ROW EXECUTE PROCEDURE chk_sch_proc();

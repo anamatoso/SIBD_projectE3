@@ -27,12 +27,15 @@ try:
         cursor = connection.cursor()
 
         # Making query
-        sql = "INSERT INTO reservation(cni,iso_code_boat, id_sailor,iso_code_sailor,start_date,end_date) VALUES (%(cni)s, %(iso_code_boat)s, %(id_sailor)s,%(iso_code_sailor)s,%(start_date)s,%(end_date)s)";
-
+        sql_schedule = "INSERT INTO schedule(start_date,end_date) VALUES (%(start_date)s,%(end_date)s)";
+	sql = "INSERT INTO reservation(cni,iso_code_boat, id_sailor,iso_code_sailor,start_date,end_date) VALUES (%(cni)s, %(iso_code_boat)s, %(id_sailor)s,%(iso_code_sailor)s,%(start_date)s,%(end_date)s)";
+        data_schedule = {'start_date':start_date,'end_date':end_date}
         data = {'cni':cni,'iso_code_boat':iso_code_boat,'id_sailor':id_sailor,'iso_code_sailor':iso_code_sailor,'start_date':start_date,'end_date':end_date}
 
         # Feed the data to the SQL query as follows to avoid SQL injection 
-        cursor.execute(sql, data)
+        cursor.execute(sql_schedule, data_schedule)
+	cursor.execute(sql, data)
+	print('Reservation added successfully.')
 
 	# Go back to homepage or add other 
         print('<p><a href="add_reservation">Add another reservation</a></p>')
