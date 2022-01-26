@@ -24,11 +24,12 @@ try:
         
         # Displaying results
         print('<p>Number of sailors registered: {}</p>'.format(num))
-        print('<table border="0" cellspacing="5">') 
+        print('<table border="1" cellspacing="0" style="width:15%;">') 
+        print('<tr><th style="text-align:center">ID</th><th style="text-align:center">ISO Code</th></tr>')
         for row in result:
                 print('<tr>')
                 for value in row:
-                        print('<td>{}</td>'.format(value))
+                        print('<td style="text-align:center">{}</td>'.format(value))
                 print('</tr>')
         print('</table>')       
 
