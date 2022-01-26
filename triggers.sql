@@ -68,7 +68,7 @@ FOR EACH ROW EXECUTE PROCEDURE chk_sch_proc();
 CREATE OR REPLACE FUNCTION del_sch_proc() RETURNS TRIGGER AS
 $$
 BEGIN
-    IF (select count((new.start_date,new.end_date)) FROM reservation)>0 THEN
+    IF (SELECT count((new.start_date,new.end_date)) FROM reservation)>0 THEN
         RETURN NULL;
     END IF;
     RETURN NEW;
@@ -77,5 +77,5 @@ $$ LANGUAGE plpgsql;
 
 DROP TRIGGER IF EXISTS del_sch ON reservation;
 CREATE TRIGGER del_sch
-before delete ON schedule
+BEFORE DELETE ON schedule
 FOR EACH ROW EXECUTE PROCEDURE del_sch_proc();
