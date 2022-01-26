@@ -16,7 +16,7 @@ print('<form action="add_owner_update.cgi" method="post">')
 print('<p>Name: <input type="text" name="name"/></p>')
 print('<p>ID: <input type="text" name="id"/></p>') 
 print('<p>Country ISO code: <input type="text" name="iso_code"/></p>')
-print('<p>Birthdate: <input type="text" name="birthdate"/></p>')
+print('<p>Birthdate: <input type="date" name="birthdate"/></p>')
 
 # Submit
 print('<p><input type="submit" value="Submit"/></p>') 
