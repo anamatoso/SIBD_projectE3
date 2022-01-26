@@ -19,7 +19,7 @@ having count(distinct iso_code) > 1;
 
 -- 3. Who are the sailors that have sailed to every location in 'Portugal'?
 -- JUSTIFICAR entre PT ou Portugal + ir buscar info as trip em vez de ao sailor (pq a trip tem os sailors que sailam, e nao todos)
-select distinct(s.id_sailor, s.iso_code_sailor)
+select distinct s.id_sailor, s.iso_code_sailor
 from trip s
 where not exists (
     (select latitude,longitude
