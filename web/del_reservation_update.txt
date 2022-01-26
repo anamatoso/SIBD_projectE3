@@ -27,10 +27,10 @@ try:
         cursor = connection.cursor()
 
         # Making query
-        sql_trip = "DELETE FROM trip WHERE cni=cni AND iso_code_boat=iso_code_boat AND id_sailor=id_sailor AND iso_code_sailor=iso_code_sailor AND start_date=start_date AND end_date=end_date";
-        sql_reservation = "DELETE FROM reservation WHERE cni=cni AND iso_code_boat=iso_code_boat AND id_sailor=id_sailor AND iso_code_sailor=iso_code_sailor AND start_date=start_date AND end_date=end_date";
-	sql_schedule = "DELETE FROM schedule WHERE start_date=start_date AND end_date=end_date";
-        data = {'cni':cni,'iso_code_boat':iso_code_boat,'id_sailor':id_sailor,'iso_code_sailor':iso_code_sailor,'start_date':start_date,'end_date':end_date}
+      	sql_trip = "DELETE FROM trip WHERE cni=%(cni)s AND iso_code_boat=%(iso_code_boat)s AND id_sailor=%(id_sailor)s AND iso_code_sailor=%(iso_code_sailor)s AND start_date=%(star>
+        sql_reservation = "DELETE FROM reservation WHERE cni=%(cni)s AND iso_code_boat=%(iso_code_boat)s AND id_sailor=%(id_sailor)s AND iso_code_sailor=%(iso_code_sailor)s AND sta>
+        sql_schedule = "DELETE FROM schedule WHERE start_date=%(start_date)s AND end_date=%(end_date)s";
+        ata = {'cni':cni,'iso_code_boat':iso_code_boat,'id_sailor':id_sailor,'iso_code_sailor':iso_code_sailor,'start_date':start_date,'end_date':end_date}
         data_schedule = {'start_date':start_date,'end_date':end_date}
 
         # Feed the data to the SQL query as follows to avoid SQL injection
