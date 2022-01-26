@@ -38,7 +38,7 @@ try:
 	print('Reservation added successfully.')
 
 	# Go back to homepage or add other 
-        print('<p><a href="add_reservation">Add another reservation</a></p>')
+        print('<p><a href="add_reservation.cgi">Add another reservation</a></p>')
 	print('<p><a href="homepage.cgi">Return to Homepage</a></p>')
 
         # Commit the update (without this step the database will not change) 

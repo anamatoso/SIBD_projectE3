@@ -39,7 +39,7 @@ try:
 	cursor.execute(sql_schedule, data_schedule)
 	print('Reservation removed successfully.')
 	# Go back to homepage or add other 
-        print('<p><a href="del_reservation">Remove another reservation</a></p>')
+        print('<p><a href="del_reservation.cgi">Remove another reservation</a></p>')
 	print('<p><a href="homepage.cgi">Return to Homepage</a></p>')
 
         # Commit the update (without this step the database will not change)
