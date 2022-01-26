@@ -11,7 +11,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-DROP TRIGGER chk_person ON person;
+DROP TRIGGER IF EXISTS chk_person ON person;
 CREATE TRIGGER chk_person
 BEFORE INSERT ON person
 FOR EACH ROW EXECUTE PROCEDURE chk_person_proc();
