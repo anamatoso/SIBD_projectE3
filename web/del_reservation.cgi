@@ -17,8 +17,8 @@ print('<p>CNI(boat): <input type="text" name="cni"/></p>')
 print('<p>Country ISO code of boat: <input type="text" name="iso_code_boat"/></p>')
 print('<p>ID of Sailor: <input type="text" name="id_sailor"/></p>') 
 print('<p>Country ISO code of Sailor: <input type="text" name="iso_code_sailor"/></p>')
-print('<p>Start date: <input type="text" name="start_date"/></p>')
-print('<p>End date: <input type="text" name="end_date"/></p>')
+print('<p>Start date: <input type="date" name="start_date"/></p>')
+print('<p>End date: <input type="date" name="end_date"/></p>')
 
 # Submit
 print('<p><input type="submit" value="Submit"/></p>') 
