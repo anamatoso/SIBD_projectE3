@@ -53,6 +53,7 @@ except Exception as e:
 	print('<h1>An error occurred.</h1>')
 	#print('<p>{}</p>'.format(e))
 	print('<p> Please try again. Check if the values you wrote are valid.</p>')
+	connection.rollback()
 finally:
 	if connection is not None:
 		connection.close()
