@@ -92,7 +92,8 @@ DROP INDEX name_idx;
 EXPLAIN ANALYSE SELECT count(*)
 FROM trip
     INNER JOIN location ON trip.end_latitude=location.latitude AND trip.end_longitude=location.longitude
-WHERE start_date BETWEEN '2015-08-10' AND '2017-12-12' AND location.name LIKE '%SOME_PATTERN%';
+WHERE start_date BETWEEN '2015-08-10' AND '2017-12-12'
+  AND location.name LIKE '%SOME_PATTERN%';
 -- Aggregate  (cost=2.69..2.70 rows=1 width=8) (actual time=0.024..0.030 rows=1 loops=1)
 --   ->  Nested Loop  (cost=0.00..2.69 rows=1 width=0) (actual time=0.019..0.022 rows=0 loops=1)
 --         Join Filter: ((trip.end_latitude = location.latitude) AND (trip.end_longitude = location.longitude))
@@ -133,6 +134,8 @@ CREATE INDEX loc_hash_idx ON location USING HASH (name);
 -- execution time: 0.081 ms (same)
 DROP INDEX loc_hash_idx;
 -- same
+
+--NOTA: tentar indice composto
 
 -- Using overloaded account to test indexes
 EXPLAIN ANALYSE SELECT count(*)

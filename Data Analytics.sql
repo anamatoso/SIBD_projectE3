@@ -8,4 +8,4 @@ order by extract(year from trip_start_date), extract(month from trip_start_date)
 select country_name_origin, loc_name_origin, count((country_name_origin,loc_name_origin))
 from trip_info
 group by rollup (country_name_origin,loc_name_origin)
-order by loc_name_origin;
+order by country_name_origin,loc_name_origin;
