@@ -5,7 +5,7 @@ create view trip_info(country_iso_origin,country_name_origin,country_iso_dest,co
 select country_iso_origin,country_name_origin,country_iso_dest,country_name_dest,loc_name_origin,
        loc_name_dest,cni_boat,country_iso_boat, country_name_boat,trip_start_date
 from (select c1.iso_code as country_iso_origin, c1.name as country_name_origin,
-             l1.name as loc_name_origin, t.start_date as trip_start_date,
+             l1.name as loc_name_origin, t.date as trip_start_date, --t.date (data de inicio da trip)
              c2.iso_code as country_iso_dest, c2.name as country_name_dest,
              l2.name as loc_name_dest, b.cni as cni_boat, b.iso_code as country_iso_boat,
              c.name as country_name_boat
