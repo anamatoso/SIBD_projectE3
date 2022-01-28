@@ -1,16 +1,16 @@
-DROP TABLE IF EXISTS trip;
-DROP TABLE IF EXISTS reservation;
-DROP TABLE IF EXISTS schedule;
-DROP TABLE IF EXISTS boat_vhf;
-DROP TABLE IF EXISTS boat;
-DROP TABLE IF EXISTS owner;
-DROP TABLE IF EXISTS sailor;
-DROP TABLE IF EXISTS person;
-DROP TABLE IF EXISTS port;
-DROP TABLE IF EXISTS wharf;
-DROP TABLE IF EXISTS marina;
-DROP TABLE IF EXISTS location;
-DROP TABLE IF EXISTS country;
+DROP TABLE IF EXISTS trip cascade;
+DROP TABLE IF EXISTS reservation cascade;
+DROP TABLE IF EXISTS schedule cascade;
+DROP TABLE IF EXISTS boat_vhf cascade;
+DROP TABLE IF EXISTS boat cascade;
+DROP TABLE IF EXISTS owner cascade;
+DROP TABLE IF EXISTS sailor cascade;
+DROP TABLE IF EXISTS person cascade;
+DROP TABLE IF EXISTS port cascade;
+DROP TABLE IF EXISTS wharf cascade;
+DROP TABLE IF EXISTS marina cascade;
+DROP TABLE IF EXISTS location cascade;
+DROP TABLE IF EXISTS country cascade;
 
 -- PROJECT --
 
