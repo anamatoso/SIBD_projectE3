@@ -1,6 +1,6 @@
 -- TRIGGERS to ensure the app functions properly
 
--- verify if sailor/owner is already is person before inserting
+-- verify if new sailor/owner is already is person before inserting
 CREATE OR REPLACE FUNCTION chk_person_proc() RETURNS TRIGGER AS
 $$
 BEGIN
