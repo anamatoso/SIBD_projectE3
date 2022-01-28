@@ -1,28 +1,16 @@
-DROP TABLE IF EXISTS trip cascade;
-DROP TABLE IF EXISTS reservation cascade;
-DROP TABLE IF EXISTS schedule cascade;
-DROP TABLE IF EXISTS boat_vhf cascade;
-DROP TABLE IF EXISTS boat cascade;
-DROP TABLE IF EXISTS owner cascade;
-DROP TABLE IF EXISTS sailor cascade;
-DROP TABLE IF EXISTS person cascade;
-DROP TABLE IF EXISTS port cascade;
-DROP TABLE IF EXISTS wharf cascade;
-DROP TABLE IF EXISTS marina cascade;
-DROP TABLE IF EXISTS location cascade;
-DROP TABLE IF EXISTS country cascade;
-
--- PROJECT --
-
--- Criar schema a parte para as tabelas do projeto ficarem no seu próprio espaço, sem outras à mistura
---CREATE SCHEMA schema_part3;
-
--- Mudar schema atual para schema do projeto
---SET search_path TO schema_part3;
-
--- Mostrar schema atual
---SHOW search_path;
-
+DROP TABLE IF EXISTS trip CASCADE;
+DROP TABLE IF EXISTS reservation CASCADE;
+DROP TABLE IF EXISTS schedule CASCADE;
+DROP TABLE IF EXISTS boat_vhf CASCADE;
+DROP TABLE IF EXISTS boat CASCADE;
+DROP TABLE IF EXISTS owner CASCADE;
+DROP TABLE IF EXISTS sailor CASCADE;
+DROP TABLE IF EXISTS person CASCADE;
+DROP TABLE IF EXISTS port CASCADE;
+DROP TABLE IF EXISTS wharf CASCADE;
+DROP TABLE IF EXISTS marina CASCADE;
+DROP TABLE IF EXISTS location CASCADE;
+DROP TABLE IF EXISTS country CASCADE;
 
 CREATE TABLE country
 (
