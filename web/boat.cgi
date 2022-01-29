@@ -7,20 +7,24 @@ print('<head>')
 print('<title>Boat Management System</title>')
 print('</head>')
 print('<body>')
-print('<h3>Boat Management System</h3>')
+print('<h3>Boats</h3>')
 connection = None
 try:
         # Creating connection
 	connection = psycopg2.connect(login.credentials)
 	cursor = connection.cursor()
-        # Print the register and remove buttons which will redirect to another page
+	
+	# List options to user: add or remove boats
 	print('<p><a href="add_boat.cgi">Register Boat</a></p>')
 	print('<p><a href="del_boat.cgi">Remove Boat</a></p>')
+	
+	# Closing connection
+	cursor.close() 
 
 except Exception as e:
         # Print errors on the webpage if they occur
 	print('<h1>An error occurred.</h1>')
-	print('<p>{}</p>'.format(e))
+	print('<p>Please try again.</p>')
 finally:
 	if connection is not None:
 		connection.close()

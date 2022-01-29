@@ -29,11 +29,9 @@ try:
 	data_person = {'id':id,'name':name,'iso_code':iso_code}
 	data_sailor = {'id':id, 'iso_code':iso_code}
 
-        # Feed the data to the SQL query as follows to avoid SQL injection 
 	cursor.execute(sql_person, data_person)
 	cursor.execute(sql_sailor, data_sailor)
 	print('Sailor added successfully.')
-
 
 	#Go back to homepage or add other
 	print('<p><a href="add_sailor.cgi">Register another sailor</a></p>')
@@ -48,7 +46,6 @@ try:
 except Exception as e:
         # Print errors on the webpage if they occur 
 	print('<h1>An error occurred.</h1>') 
-	#print('<p>{}</p>'.format(e))
 	print('<p> Please try again. Check if the values you wrote are valid.</p>')
 	connection.rollback()
 finally:

@@ -40,7 +40,7 @@ try:
 except Exception as e:
         # Print errors on the webpage if they occur 
 	print('<h1>An error occurred.</h1>') 
-	#print('<p>{}</p>'.format(e))
+	print('<p> Please try again. Check if the values you wrote are valid.</p>')
 finally:
 	if connection is not None:
 		connection.close()

@@ -17,7 +17,7 @@ try:
 	connection = psycopg2.connect(login.credentials)
 	cursor = connection.cursor()
 
-        # List options to user: add or remove owners
+        # List options to user
 	print('<p><a href="owner.cgi">Register or remove owners</a></p>')
 	print('<p><a href="boat.cgi">Register or remove boats</a></p>')
 	print('<p><a href="sailor.cgi">Insert, list and remove boat sailors</a></p>')
@@ -29,7 +29,6 @@ try:
 except Exception as e:
         # Print errors on the webpage if they occur 
 	print('<h1>An error occurred.</h1>') 
-	#print('<p>{}</p>'.format(e))
 finally:
 	if connection is not None:
 		connection.close()

@@ -7,12 +7,12 @@ print('<head>')
 print('<title>Boat Management System</title>') 
 print('</head>')
 print('<body>')
-print('<h3>Delete Reservation</h3>')
+print('<h3>Delete reservation</h3>')
 
 # The form will send the info needed for the SQL query 
 print('<form action="del_reservation_update.cgi" method="post">') 
 
-# Information on the new owner will be inserted here
+# Information on the new reservation will be inserted here
 print('<p>CNI(boat): <input type="text" name="cni"/></p>')
 print('<p>Country ISO code of boat: <input type="text" name="iso_code_boat"/></p>')
 print('<p>ID of Sailor: <input type="text" name="id_sailor"/></p>') 

@@ -24,7 +24,7 @@ try:
 except Exception as e:
         # Print errors on the webpage if they occur 
 	print('<h1>An error occurred.</h1>') 
-	#print('<p>{}</p>'.format(e))
+	print('<p>Please try again.</p>')
 finally:
 	if connection is not None:
 		connection.close()

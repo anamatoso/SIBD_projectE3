@@ -27,7 +27,6 @@ try:
 
 	data = {'id':id,'iso_code':iso_code}
 
-        # Feed the data to the SQL query as follows to avoid SQL injection 
 	cursor.execute(sql_sailor, data)
 	print('Sailor removed successfully.')
 
@@ -44,7 +43,6 @@ try:
 except Exception as e:
         # Print errors on the webpage if they occur 
 	print('<h1>An error occurred.</h1>') 
-	#print('<p>{}</p>'.format(e))
 	print('<p> Please try again. Check if the values you wrote are valid.</p>')
 	connection.rollback()
 finally:

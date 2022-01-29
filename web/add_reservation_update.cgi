@@ -32,7 +32,6 @@ try:
 	data = {'cni':cni,'iso_code_boat':iso_code_boat,'id_sailor':id_sailor,'iso_code_sailor':iso_code_sailor,'start_date':start_date,'end_date':end_date}
 	data_schedule = {'start_date':start_date,'end_date':end_date}
 
-        # Feed the data to the SQL query as follows to avoid SQL injection 
 	cursor.execute(sql_schedule, data_schedule)
 	cursor.execute(sql, data)
 	print('Reservation added successfully.')
@@ -50,7 +49,6 @@ try:
 except Exception as e:
         # Print errors on the webpage if they occur 
 	print('<h1>An error occurred.</h1>') 
-	#print('<p>{}</p>'.format(e))
 	print('<p> Please try again. Check if the values you wrote are valid.</p>')
 	connection.rollback()
 finally:

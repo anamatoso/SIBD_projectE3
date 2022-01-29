@@ -26,7 +26,8 @@ try:
         # Creating connection
 	connection = psycopg2.connect(login.credentials)
 	cursor = connection.cursor()
-        # Making query
+        
+	# Making query
 	sql = 'INSERT INTO boat(name,year,cni,iso_code,id_owner,iso_code_owner) VALUES (%(name)s,%(year)s,%(cni)s,%(iso_code)s,%(id_owner)s,%(iso_code_owner)s);'
 	data = {'name':name,'year':year,'cni':cni,'iso_code':iso_code,'id_owner':id_owner,'iso_code_owner':iso_code_owner}
 	cursor.execute(sql, data)
@@ -37,21 +38,24 @@ try:
 		cursor.execute(sql_vhf, data_vhf)
 
 	print('Boat added successfully.')
+	
+	# Go back to homepage or add other
 	print('<p><a href="add_boat.cgi">Register another Boat</a></p>')
 	print('<p><a href="homepage.cgi">Return to Homepage</a></p>')
-        # Feed the data to the SQL query as follows to avoid SQL injection
 
-        # Commit the update (without this step the database will not change)
+	# Commit the update (without this step the database will not change)
 	connection.commit()
+
         # Closing connection
 	cursor.close()
+
 except Exception as e:
         # Print errors on the webpage if they occur
 	print('<h1>An error occurred.</h1>')
-	#print('<p>{}</p>'.format(e))
 	print('<p> Please try again. Check if the values you wrote are valid.</p>')
 	connection.rollback()
 finally:
 	if connection is not None:
 		connection.close()
 print('</body>')
+print('</html>')
