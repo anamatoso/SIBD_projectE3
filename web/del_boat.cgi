@@ -14,7 +14,7 @@ print('<h3>Remove boat</h3>')
 # The form will send the info needed for the SQL query
 print('<form action="del_boat_update.cgi" method="post">')
 
-# Information on the new sailor will be inserted here
+# Information on the boat will be inserted here
 print('<p>CNI: <input type="text" name="cni"/></p>')
 print('<p>ISO Code: <input type="text" name="iso_code"/></p>')
 print('<p>MMSI (optional): <input type="text" name="mmsi"/></p>')
