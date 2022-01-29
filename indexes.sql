@@ -25,7 +25,7 @@ WHERE year >= 2015 AND country.name = 'Portugal';
 -- can navigated through the records according to whether these are higher or smaller than a certain record. For the
 -- country name attribute, since we are searching for a specific value, we can use a hash index to help the process.
 -- To test this, a timing analysis was performed.
-
+SET enable_seqscan = ON;
 CREATE INDEX year_idx ON boat(year); --b-tree index on boat.year
 -- planning time: 0.269 ms (same)
 -- execution time: 0.097 ms (same)
@@ -115,7 +115,7 @@ WHERE start_date BETWEEN '2015-08-10' AND '2017-12-12'
 -- query's execution time.
 -- Reference: https://www.viralpatel.net/oracle-index-usage-like-operator-domain-indexes/
 
-CREATE INDEX start_date_idx ON trip(start_date);
+CREATE INDEX start_date_idx ON trip(start_date); --uses
 -- planning time: 0.509 ms (same)
 -- execution time: 0.106 ms (same)
 DROP INDEX start_date_idx;
@@ -134,8 +134,6 @@ CREATE INDEX loc_hash_idx ON location USING HASH (name);
 -- execution time: 0.081 ms (same)
 DROP INDEX loc_hash_idx;
 -- same
-
---NOTA: tentar indice composto
 
 -- Using overloaded account to test indexes
 EXPLAIN ANALYSE SELECT count(*)
